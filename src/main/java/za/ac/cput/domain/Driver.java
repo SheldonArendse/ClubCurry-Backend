@@ -75,7 +75,7 @@ public class Driver extends Employee{
             return this;
 
         }
-        Driver build(){
+        public Driver build(){
             return new Driver(this);
         }
     }
