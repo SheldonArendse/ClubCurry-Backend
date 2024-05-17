@@ -11,7 +11,7 @@ public class Driver extends Employee{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     String driverId;
-
+//ONE TO ONE
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="registrationNumber")
     Vehicle registrationNumber;
