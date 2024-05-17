@@ -11,4 +11,5 @@ public class Helper {
     public static boolean isNull(int obj){
         return obj<=0;
     }
+    public static boolean isNull(double obj){ return obj<=0;}
 }
