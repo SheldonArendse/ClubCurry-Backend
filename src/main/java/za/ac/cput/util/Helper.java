@@ -4,4 +4,8 @@ public class Helper {
     public static boolean isNullOrEmpty(Object object) {
         return object == null || object.toString().isEmpty();
     }
+
+    public static boolean isNullOrEmpty(String obj){
+        return obj == null || obj.isEmpty();
+    }
 }
