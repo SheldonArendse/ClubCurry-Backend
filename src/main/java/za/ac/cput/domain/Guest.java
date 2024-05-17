@@ -10,6 +10,7 @@ Date:  17 May 2024
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import org.hibernate.annotations.NotFound;
 
 import java.util.List;
@@ -22,10 +23,10 @@ public class Guest {
     private String firstName;
     private String lastName;
     private String mobileNumber;
-    @OneToMany
-    private List<Address> guestAddress;
-    @OneToMany
-    private List<PaymentMethod> paymentMethod;
+    @OneToOne
+    private Address guestAddress;
+    @OneToOne
+    private PaymentMethod paymentMethod;
 
     protected Guest(){}
 
@@ -54,17 +55,16 @@ public class Guest {
         return mobileNumber;
     }
 
-    public List<Address> getGuestAddress() {
+    public Address getGuestAddress() {
         return guestAddress;
     }
 
-    public List<PaymentMethod> getPaymentMethod() {
+    public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (!(o instanceof Guest guest)) return false;
         return Objects.equals(email, guest.email) && Objects.equals(firstName, guest.firstName) && Objects.equals(lastName, guest.lastName) && Objects.equals(mobileNumber, guest.mobileNumber) && Objects.equals(guestAddress, guest.guestAddress) && Objects.equals(paymentMethod, guest.paymentMethod);
@@ -92,8 +92,8 @@ public class Guest {
         private String firstName;
         private String lastName;
         private String mobileNumber;
-        private List<Address> guestAddress;
-        private List<PaymentMethod> paymentMethod;
+        private Address guestAddress;
+        private PaymentMethod paymentMethod;
 
         public Builder setEmail(String email) {
             this.email = email;
@@ -115,12 +115,12 @@ public class Guest {
             return this;
         }
 
-        public Builder setGuestAddress(List<Address> guestAddress) {
+        public Builder setGuestAddress(Address guestAddress) {
             this.guestAddress = guestAddress;
             return this;
         }
 
-        public Builder setPaymentMethod(List<PaymentMethod> paymentMethod) {
+        public Builder setPaymentMethod(PaymentMethod paymentMethod) {
             this.paymentMethod = paymentMethod;
             return this;
         }
