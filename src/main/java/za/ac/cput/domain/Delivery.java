@@ -130,5 +130,9 @@ public class Delivery {
             this.deliveryNote = obj.deliveryNote;
             return this;
         }
+
+        public Delivery build() {
+            return new Delivery(this);
+        }
     }
 }
