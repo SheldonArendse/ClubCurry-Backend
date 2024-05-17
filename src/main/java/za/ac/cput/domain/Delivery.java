@@ -1,20 +1,23 @@
 package za.ac.cput.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+
+import za.ac.cput.domain.Driver;
 
 import java.sql.Time;
 import java.util.Objects;
 
 @Entity
 public class Delivery {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private String deliveryId;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="timer_id")
     private TimeAllocation deliveryTime;
     private Boolean status;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="driver_id")
     private Driver driverId;
     private Time deliveredAt;
     private String deliveryNote;
@@ -25,6 +28,7 @@ public class Delivery {
         this.deliveryId = builder.deliveryId;
         this.deliveryTime = builder.deliveryTime;
         this.status = builder.status;
+        this.driverId = builder.driverId;
         this.deliveredAt = builder.deliveredAt;
         this.deliveryNote = builder.deliveryNote;
     }
@@ -41,6 +45,10 @@ public class Delivery {
         return status;
     }
 
+    public Driver getDriverId() {
+        return driverId;
+    }
+
     public Time getDeliveredAt() {
         return deliveredAt;
     }
@@ -53,12 +61,12 @@ public class Delivery {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Delivery delivery)) return false;
-        return Objects.equals(getDeliveryId(), delivery.getDeliveryId()) && Objects.equals(getDeliveryTime(), delivery.getDeliveryTime()) && Objects.equals(getStatus(), delivery.getStatus()) && Objects.equals(getDeliveredAt(), delivery.getDeliveredAt()) && Objects.equals(getDeliveryNote(), delivery.getDeliveryNote());
+        return Objects.equals(getDeliveryId(), delivery.getDeliveryId()) && Objects.equals(getDeliveryTime(), delivery.getDeliveryTime()) && Objects.equals(getStatus(), delivery.getStatus()) && Objects.equals(getDriverId(), delivery.getDriverId()) && Objects.equals(getDeliveredAt(), delivery.getDeliveredAt()) && Objects.equals(getDeliveryNote(), delivery.getDeliveryNote());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDeliveryId(), getDeliveryTime(), getStatus(), getDeliveredAt(), getDeliveryNote());
+        return Objects.hash(getDeliveryId(), getDeliveryTime(), getStatus(), getDriverId(), getDeliveredAt(), getDeliveryNote());
     }
 
     @Override
@@ -67,6 +75,7 @@ public class Delivery {
                 "Delivery ID = " + deliveryId + "\n" +
                 "Delivery Time = " + deliveryTime + "\n" +
                 "Status = " + status + "\n" +
+                "Driver ID = " + driverId + "\n" +
                 "Delivered at = " + deliveredAt +
                 "Delivery Note = " + deliveryNote;
     }
@@ -77,8 +86,8 @@ public class Delivery {
         @OneToOne
         private TimeAllocation deliveryTime;
         private Boolean status;
-        //    @OneToOne
-//    private Driver driverId;
+        @OneToOne
+        private Driver driverId;
         private Time deliveredAt;
         private String deliveryNote;
 
@@ -97,6 +106,11 @@ public class Delivery {
             return this;
         }
 
+        public Builder setDriverId(Driver driverId) {
+            this.driverId = driverId;
+            return this;
+        }
+
         public Builder setDeliveredAt(Time deliveredAt) {
             this.deliveredAt = deliveredAt;
             return this;
@@ -111,6 +125,7 @@ public class Delivery {
             this.deliveryId = obj.deliveryId;
             this.deliveryTime = obj.deliveryTime;
             this.status = obj.status;
+            this.driverId = obj.driverId;
             this.deliveredAt = obj.deliveredAt;
             this.deliveryNote = obj.deliveryNote;
             return this;

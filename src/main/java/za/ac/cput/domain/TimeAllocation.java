@@ -1,21 +1,23 @@
 package za.ac.cput.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+
+import za.ac.cput.domain.Order;
 
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 public class TimeAllocation {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private String timerId;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "chef_id")
     private Chef preparedBy;
-//    @OneToOne
-//    private Order order;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id")
+    private Order order;
     private Date datePrepared;
 
     protected TimeAllocation() {}
@@ -23,6 +25,8 @@ public class TimeAllocation {
     public TimeAllocation(Builder builder) {
         this.timerId = builder.timerId;
         this.datePrepared = builder.datePrepared;
+        this.preparedBy = builder.preparedBy;
+        this.order = builder.order;
     }
 
     public String getTimerId() {
@@ -33,23 +37,33 @@ public class TimeAllocation {
         return datePrepared;
     }
 
+    public Chef getPreparedBy() {
+        return preparedBy;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TimeAllocation that)) return false;
-        return Objects.equals(getTimerId(), that.getTimerId()) && Objects.equals(getDatePrepared(), that.getDatePrepared());
+        return Objects.equals(getTimerId(), that.getTimerId()) && Objects.equals(getPreparedBy(), that.getPreparedBy()) && Objects.equals(getOrder(), that.getOrder()) && Objects.equals(getDatePrepared(), that.getDatePrepared());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTimerId(), getDatePrepared());
+        return Objects.hash(getTimerId(), getPreparedBy(), getOrder(), getDatePrepared());
     }
 
     @Override
     public String toString() {
         return "Time Allocation" + "\n-----------------\n" +
                 "Timer ID = " + timerId + "\n" +
-                "Date Prepared = " + datePrepared + "\n";
+                "Date Prepared = " + datePrepared + "\n" +
+                "Prepared By = Chef " + preparedBy + "\n" +
+                "Order = " + order + "\n";
     }
 
     public static class Builder {
@@ -70,9 +84,21 @@ public class TimeAllocation {
             return this;
         }
 
+        public Builder setPreparedBy(Chef preparedBy) {
+            this.preparedBy = preparedBy;
+            return this;
+        }
+
+        public Builder setOrder(Order order) {
+            this.order = order;
+            return this;
+        }
+
         public Builder copy(TimeAllocation obj) {
             this.timerId = obj.timerId;
             this.datePrepared = obj.datePrepared;
+            this.preparedBy = obj.preparedBy;
+            this.order = obj.order;
             return this;
         }
 
