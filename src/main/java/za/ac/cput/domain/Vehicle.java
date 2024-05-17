@@ -4,11 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-//Aaniquah Dicks
+
 import java.util.Objects;
 
 @Entity
-
 public class Vehicle {
     @Id
     String registrationNumber;
@@ -19,6 +18,7 @@ public class Vehicle {
     public Vehicle() {
 
     }
+
     public Vehicle(Builder builder) {
         this.registrationNumber = builder.registrationNumber;
         this.model = builder.model;
@@ -27,8 +27,7 @@ public class Vehicle {
     }
 
     public String getRegistration() {
-        return registrationNumber
-                ;
+        return registrationNumber;
     }
 
     public String getModel() {
@@ -66,7 +65,7 @@ public class Vehicle {
                 '}';
     }
 
-    public static class Builder{
+    public static class Builder {
         String registrationNumber;
         String model;
         String color;
@@ -92,7 +91,7 @@ public class Vehicle {
             return this;
         }
 
-        public Builder copy(Vehicle obj){
+        public Builder copy(Vehicle obj) {
             this.registrationNumber = obj.registrationNumber;
             this.model = obj.model;
             this.color = obj.color;
@@ -100,7 +99,7 @@ public class Vehicle {
             return this;
         }
 
-        Vehicle build(){
+        public Vehicle build() {
             return new Vehicle(this);
         }
     }
