@@ -11,10 +11,10 @@ import java.util.Objects;
 
 public class Vehicle {
     @Id
-    String registrationNumber;
-    String model;
-    String color;
-    String make;
+   private String registrationNumber;
+   private String model;
+   private String color;
+    private String make;
 
     public Vehicle() {
 
@@ -100,7 +100,7 @@ public class Vehicle {
             return this;
         }
 
-        Vehicle build(){
+        public Vehicle build(){
             return new Vehicle(this);
         }
     }
