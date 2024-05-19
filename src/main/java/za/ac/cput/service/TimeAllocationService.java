@@ -28,11 +28,6 @@ public class TimeAllocationService implements ITimeAllocationService {
     }
 
     @Override
-    public TimeAllocation update(TimeAllocation obj) {
-        return timeAllocationRepository.save(obj);
-    }
-
-    @Override
     public void delete(TimeAllocation obj) {
         timeAllocationRepository.delete(obj);
     }
