@@ -27,16 +27,13 @@ public class OrderService implements IOrderService{
     }
 
     @Override
-    public Order update(Order order) {
-        return orderRepository.save(order);
+    public void delete(Order obj) {
+        orderRepository.delete(obj);
     }
-    @Override
-    public void delete(String orderId) {
-        orderRepository.deleteById(orderId);
 
-    }
     @Override
-    public List<Order> getall() {
+    public List<Order> getAll() {
         return orderRepository.findAll();
     }
+
 }

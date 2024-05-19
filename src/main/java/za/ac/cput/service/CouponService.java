@@ -27,17 +27,14 @@ public class CouponService implements ICouponService{
     }
 
     @Override
-    public Coupon update(Coupon coupon) {
-        return couponRepository.save(coupon);
-    }
-    @Override
-    public void delete(String couponId) {
-        couponRepository.deleteById(couponId);
-
+    public void delete(Coupon obj) {
+        couponRepository.delete(obj);
     }
 
     @Override
-    public List<Coupon> getall() {
+    public List<Coupon> getAll() {
         return couponRepository.findAll();
     }
+
+
 }
