@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Driver;
 
 @Repository
-public interface DriverRepository extends JpaRepository <Driver,String>{
+public interface DriverRepository extends JpaRepository <Driver, String>{
 }
