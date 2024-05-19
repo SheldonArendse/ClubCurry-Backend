@@ -19,14 +19,16 @@ public class DeliveryService implements IDeliveryService {
 
     @Override
     public Delivery create(Delivery obj) {
+
         return deliveryRepository.save(obj);
     }
 
     @Override
     public Delivery read(String s) {
+
         return deliveryRepository.findById(s).orElseThrow(null);
     }
-    
+
     @Override
     public void delete(Delivery obj) {
         deliveryRepository.delete(obj);
