@@ -29,7 +29,6 @@ public class DeliveryService implements IDeliveryService {
         return deliveryRepository.findById(s).orElseThrow(null);
     }
 
-
     @Override
     public void delete(Delivery obj) {
         deliveryRepository.delete(obj);
