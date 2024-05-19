@@ -26,12 +26,7 @@ public class DeliveryService implements IDeliveryService {
     public Delivery read(String s) {
         return deliveryRepository.findById(s).orElseThrow(null);
     }
-
-    @Override
-    public Delivery update(Delivery obj) {
-        return deliveryRepository.save(obj);
-    }
-
+    
     @Override
     public void delete(Delivery obj) {
         deliveryRepository.delete(obj);
