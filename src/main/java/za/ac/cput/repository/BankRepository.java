@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Bank;
 
 @Repository
-public interface BankRepository extends JpaRepository<Bank, Integer> {
+public interface BankRepository extends JpaRepository<Bank, String> {
 }

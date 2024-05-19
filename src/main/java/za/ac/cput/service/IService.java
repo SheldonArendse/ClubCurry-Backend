@@ -1,5 +1,4 @@
 package za.ac.cput.service;
-
 import java.util.List;
 
 public interface IService<T, ID>{
