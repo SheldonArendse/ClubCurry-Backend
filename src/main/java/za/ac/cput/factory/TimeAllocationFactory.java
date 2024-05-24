@@ -8,7 +8,7 @@ import za.ac.cput.util.Helper;
 import java.util.Date;
 
 public class TimeAllocationFactory {
-    public static TimeAllocation createTimeAllocation(String timerId, Order order, Date datePrepared, Chef preparedBy) {
+    public static TimeAllocation buildTimeAllocation(String timerId, Order order, Date datePrepared, Chef preparedBy) {
         if(Helper.isNullOrEmpty(timerId)
                 || Helper.isNullOrEmpty(order)
                 || Helper.isNullOrEmpty(datePrepared)
@@ -22,5 +22,14 @@ public class TimeAllocationFactory {
                 .setDatePrepared(datePrepared)
                 .setPreparedBy(preparedBy)
                 .build();
+    }
+
+    public static TimeAllocation buildTimeAllocation(String timerId) {
+        if(Helper.isNullOrEmpty(timerId)) {
+            return new TimeAllocation.Builder()
+                    .setTimerId(timerId)
+                    .build();
+        }
+        return null;
     }
 }
