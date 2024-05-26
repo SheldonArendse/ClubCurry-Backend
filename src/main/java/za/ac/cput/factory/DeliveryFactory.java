@@ -8,7 +8,7 @@ import za.ac.cput.util.Helper;
 import java.sql.Time;
 
 public class DeliveryFactory {
-    public static Delivery createDelivery(String deliveryId, TimeAllocation deliveryTime, Boolean status, Driver driverId, Time deliveredAt, String deliveryNote) {
+    public static Delivery buildDelivery(String deliveryId, TimeAllocation deliveryTime, Boolean status, Driver driverId, Time deliveredAt, String deliveryNote) {
         if(Helper.isNullOrEmpty(deliveryId)
                 ||  Helper.isNullOrEmpty(deliveryTime)
                 || Helper.isNullOrEmpty(status)
@@ -24,6 +24,15 @@ public class DeliveryFactory {
                 .setDriverId(driverId)
                 .setDeliveredAt(deliveredAt)
                 .setDeliveryNote(deliveryNote)
+                .build();
+    }
+
+    public static Delivery buildDelivery(String deliveryId) {
+        if (Helper.isNullOrEmpty(deliveryId)) {
+            return null;
+        }
+        return new Delivery.Builder()
+                .setDeliveryId(deliveryId)
                 .build();
     }
 }
