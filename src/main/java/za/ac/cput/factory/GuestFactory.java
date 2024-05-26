@@ -51,5 +51,14 @@ public class GuestFactory {
                 .build();
     }
 
+    public static Guest buildGuest(String email){
+        if (CustomerHelper.testEmail(email)){
+            return null;
+        }
+        return new Guest.Builder()
+                .setEmail(email)
+                .build();
+    }
+
 
 }
