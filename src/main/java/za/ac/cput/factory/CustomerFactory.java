@@ -54,4 +54,12 @@ return  null;
                 .setPaymentMethod(paymentMethod)
                 .build();
     }
+    public static Customer buildCustomer(String email) {
+        if (CustomerHelper.testEmail(email)){
+            return  null;
+        }
+        return new Customer.Builder()
+                .setEmail(email)
+                .build();
+    }
 }
