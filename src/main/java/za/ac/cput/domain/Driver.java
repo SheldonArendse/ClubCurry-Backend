@@ -2,19 +2,14 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
-
 @Entity
-public class Special {
-
+public class Driver extends Employee{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private Date expires;
+    private double petrolAllowance;
 
-    private double price;
-
-    @OneToOne
-    private MenuItem item;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Vehicle registration;
 }

@@ -21,4 +21,11 @@ public class Orders {
     private Date orderWanted;
 
     private boolean isComplete;
+
+    private PaymentMethod paymentMethod;
+
+    private CollectionType collectionType;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Chef preparedBy;
 }
