@@ -1,7 +1,6 @@
-package za.ac.cput.domain;
+package za.ac.cput.domain.embedded;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
 
 import java.util.Objects;
 

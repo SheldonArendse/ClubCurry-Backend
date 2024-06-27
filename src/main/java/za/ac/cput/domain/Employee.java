@@ -10,19 +10,12 @@ import java.util.Objects;
 @MappedSuperclass
 public class Employee {
     @Id
-    private String id;
+    protected String id;
 
-    private String name, surname, username, password;
+    protected String name, surname, username, password;
 
     protected Employee(){}
 
-    public Employee(Builder obj) {
-        this.id = obj.id;
-        this.name = obj.name;
-        this.surname = obj.surname;
-        this.username = obj.username;
-        this.password = obj.password;
-    }
 
     public String getId() {
         return id;
@@ -66,49 +59,5 @@ public class Employee {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
-    }
-
-    public static class Builder{
-        private String id;
-
-        private String name, surname, username, password;
-
-        public Builder setId(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder setName(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Builder setSurname(String surname) {
-            this.surname = surname;
-            return this;
-        }
-
-        public Builder setUsername(String username) {
-            this.username = username;
-            return this;
-        }
-
-        public Builder setPassword(String password) {
-            this.password = password;
-            return this;
-        }
-
-        public Builder copy(Employee obj){
-            this.id = obj.id;
-            this.name = obj.name;
-            this.surname = obj.surname;
-            this.username = obj.username;
-            this.password = obj.password;
-            return this;
-        }
-
-        public Employee build(){
-            return new Employee(this);
-        }
     }
 }
