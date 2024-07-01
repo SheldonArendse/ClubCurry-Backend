@@ -22,6 +22,9 @@ public class Delivery {
     @OneToOne(cascade = CascadeType.ALL)
     private Orders order;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
+
     protected Delivery(){}
 
     public Delivery(Builder obj) {
@@ -30,6 +33,11 @@ public class Delivery {
         this.completed = obj.completed;
         this.driver = obj.driver;
         this.order = obj.order;
+        this.address = obj.address;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 
     public long getId() {
@@ -57,12 +65,12 @@ public class Delivery {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Delivery delivery = (Delivery) o;
-        return id == delivery.id && delivered == delivery.delivered && Objects.equals(completed, delivery.completed) && Objects.equals(driver, delivery.driver) && Objects.equals(order, delivery.order);
+        return id == delivery.id && delivered == delivery.delivered && Objects.equals(completed, delivery.completed) && Objects.equals(driver, delivery.driver) && Objects.equals(order, delivery.order) && Objects.equals(address, delivery.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, delivered, completed, driver, order);
+        return Objects.hash(id, delivered, completed, driver, order, address);
     }
 
     @Override
@@ -73,6 +81,7 @@ public class Delivery {
                 ", completed=" + completed +
                 ", driver=" + driver +
                 ", order=" + order +
+                ", address=" + address +
                 '}';
     }
 
@@ -86,6 +95,12 @@ public class Delivery {
         private Driver driver;
 
         private Orders order;
+        private Address address;
+
+        public Builder setAddress(Address address) {
+            this.address = address;
+            return this;
+        }
 
         public Builder setId(long id) {
             this.id = id;
@@ -118,6 +133,7 @@ public class Delivery {
             this.completed = obj.completed;
             this.driver = obj.driver;
             this.order = obj.order;
+            this.address = obj.address;
             return this;
         }
 

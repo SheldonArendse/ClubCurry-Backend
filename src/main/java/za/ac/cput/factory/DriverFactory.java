@@ -5,13 +5,21 @@ import za.ac.cput.domain.Vehicle;
 import za.ac.cput.utils.Validation;
 
 public class DriverFactory {
-        public static Driver buildDriver(double petrolAllowance, Vehicle registration, String name, String surname, String password, String username){
-            if(registration !=null
+        public static Driver buildDriver(String id, double petrolAllowance, Vehicle registration, String name, String surname, String password, String username){
+            try{
+                long i = Long.parseLong(id);
+            }catch(NumberFormatException ex){
+                System.out.println("Error: " + ex.getLocalizedMessage());
+                return null;
+            }
+
+            if(id.length() == 13 && registration !=null
                     && Validation.isValidString(name)
                     && Validation.isValidString(surname)
                     && Validation.isValidPassword(password)
                     && !username.isEmpty()){
                 return new Driver.Builder()
+                        .setId(id)
                         .setName(name)
                         .setRegistration(registration)
                         .setPetrolAllowance(petrolAllowance)
@@ -21,7 +29,7 @@ public class DriverFactory {
             }
             return null;
         }
-    public static Driver buildDriver(String id, double petrolAllowance, Vehicle registration, String name, String surname, String password, String username){
+    public static Driver buildDriver(String id, String name, String surname, String password, String username){
         try{
             long i = Long.parseLong(id);
         }catch(NumberFormatException ex){
@@ -29,15 +37,13 @@ public class DriverFactory {
             return null;
         }
 
-        if(registration !=null && id.length() == 13
+        if( id.length() == 13
                 && Validation.isValidString(name)
                 && Validation.isValidString(surname)
                 && Validation.isValidPassword(password)
                 && !username.isEmpty()){
             return new Driver.Builder()
                     .setName(name)
-                    .setRegistration(registration)
-                    .setPetrolAllowance(petrolAllowance)
                     .setSurname(surname)
                     .setUsername(username)
                     .setPassword(password).build();
