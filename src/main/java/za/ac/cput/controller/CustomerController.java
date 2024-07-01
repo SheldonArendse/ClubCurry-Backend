@@ -1,16 +1,15 @@
 package za.ac.cput.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.function.EntityResponse;
-import za.ac.cput.domain.Address;
 import za.ac.cput.domain.Customer;
-import za.ac.cput.factory.AddressFactory;
 import za.ac.cput.factory.CustomerFactory;
 import za.ac.cput.service.CustomerService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,6 +18,10 @@ public class CustomerController {
 
     private CustomerService customerService;
 
+    @Autowired
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @PostMapping("/save")
     public ResponseEntity<Customer> save(@RequestBody Customer obj) {
@@ -56,5 +59,16 @@ public class CustomerController {
     @GetMapping("/getAll")
     public ResponseEntity<List<Customer>>getAll() {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.getAll());
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<Customer> login(@RequestBody Customer obj){
+        Customer login = CustomerFactory.buildCustomer(obj.getEmail(), obj.getPassword());
+
+        if(login == null){
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.findByEmailAndPassword(login.getEmail(), login.getPassword()));
     }
 }

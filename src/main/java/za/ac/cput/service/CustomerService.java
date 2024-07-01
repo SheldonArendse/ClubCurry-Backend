@@ -49,4 +49,8 @@ public class CustomerService implements ICustomerService {
     public List<Customer> getAll() {
         return customerRepo.findAll();
     }
+
+    public Customer findByEmailAndPassword(String username, String password){
+        return customerRepo.findCustomerByEmailAndPassword(username,password);
+    }
 }

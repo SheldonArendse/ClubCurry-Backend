@@ -10,6 +10,7 @@ public class CustomerFactory {
 
     public static Customer buildCustomer(String email, String name, String surname, String mobileNo, String password, List<Address> addresses){
         if(Validation.isValidEmail(email)
+                && !addresses.isEmpty()
                 && Validation.isValidString(name)
                 && Validation.isValidString(surname)
                 && Validation.isValidMobileNo(mobileNo)
@@ -39,6 +40,13 @@ public class CustomerFactory {
                     .setMobileNo(mobileNo)
                     .setPassword(password)
                     .build();
+        }
+        return null;
+    }
+
+    public static Customer buildCustomer(String username,String password){
+        if(Validation.isValidEmail(username) && Validation.isValidPassword(password)){
+            return new Customer.Builder().setEmail(username).setPassword(password).build();
         }
         return null;
     }
