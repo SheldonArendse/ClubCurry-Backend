@@ -1,7 +1,9 @@
 package za.ac.cput.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import za.ac.cput.domain.Cart;
+import org.springframework.stereotype.Repository;
+import za.ac.cput.domain.Chef;
 
-public interface ChefRepo extends JpaRepository<Cart, String> {
+@Repository
+public interface ChefRepo extends JpaRepository<Chef, String> {
 }
