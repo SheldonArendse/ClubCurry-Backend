@@ -1,9 +1,6 @@
 package za.ac.cput.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +14,8 @@ public class Customer {
 
     private String name, surname, mobileNo, password;
 
-    @OneToMany
-    @JoinColumn(name = "customer_email")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cust_email", referencedColumnName = "email")
     private List<Address> addresses;
 
     protected Customer(){}
