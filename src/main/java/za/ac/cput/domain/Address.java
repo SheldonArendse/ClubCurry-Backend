@@ -1,5 +1,6 @@
 package za.ac.cput.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import za.ac.cput.domain.embedded.Suburb;
 
@@ -21,6 +22,10 @@ public class Address {
     })
     private Suburb suburb;
 
+    @JsonBackReference
+    @ManyToOne
+    private Customer customerId;
+
     protected Address(){};
 
     public Address(Builder obj) {
@@ -28,6 +33,11 @@ public class Address {
         this.streetName = obj.streetName;
         this.streetNo = obj.streetNo;
         this.suburb = obj.suburb;
+        this.customerId = obj.customerId;
+    }
+
+    public Customer getCustomerId() {
+        return customerId;
     }
 
     public long getId() {
@@ -51,12 +61,12 @@ public class Address {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return id == address.id && Objects.equals(streetName, address.streetName) && Objects.equals(streetNo, address.streetNo) && Objects.equals(suburb, address.suburb);
+        return id == address.id && Objects.equals(streetName, address.streetName) && Objects.equals(streetNo, address.streetNo) && Objects.equals(suburb, address.suburb) && Objects.equals(customerId, address.customerId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, streetName, streetNo, suburb);
+        return Objects.hash(id, streetName, streetNo, suburb, customerId);
     }
 
     @Override
@@ -65,7 +75,8 @@ public class Address {
                 "id=" + id +
                 ", streetName='" + streetName + '\'' +
                 ", streetNo='" + streetNo + '\'' +
-                ", suburb=" + suburb +
+                ", suburb=" + suburb + '\'' +
+                ", customer=" + customerId +
                 '}';
     }
 
@@ -74,6 +85,13 @@ public class Address {
 
         private String streetName, streetNo;
         private Suburb suburb;
+
+        private Customer customerId;
+
+        public Builder setCustomerId(Customer customerId) {
+            this.customerId = customerId;
+            return this;
+        }
 
         public Builder setId(long id) {
             this.id = id;
@@ -100,6 +118,7 @@ public class Address {
             this.streetName = obj.streetName;
             this.streetNo = obj.streetNo;
             this.suburb = obj.suburb;
+            this.customerId = obj.customerId;
             return this;
         }
 

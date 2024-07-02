@@ -21,7 +21,7 @@ class CustomerFactoryTest {
 
     @Test
     void buildCustomerWithAddresses() {
-        Address a1 = AddressFactory.buildAddress("fake Street", "23","belhar",7494);
+        Address a1 = AddressFactory.buildAddress("fake Street", "23","belhar",7494,  new Customer.Builder().setEmail("logancoghill18@gmail.com").build());
         List<Address> listA = new ArrayList<>();
         listA.add(a1);
         Customer c1 = CustomerFactory.buildCustomer("logancoghill18@gmail.com", "Logan", "Coghill","0875632598","Th#s1sATest", listA);

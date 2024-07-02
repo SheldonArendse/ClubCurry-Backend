@@ -1,5 +1,6 @@
 package za.ac.cput.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.HashMap;
@@ -14,8 +15,8 @@ public class Customer {
 
     private String name, surname, mobileNo, password;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cust_email", referencedColumnName = "email")
+    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Address> addresses;
 
     protected Customer(){}

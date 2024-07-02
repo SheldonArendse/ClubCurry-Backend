@@ -42,11 +42,11 @@ public class CustomerController {
     @PutMapping("/update")
     public ResponseEntity<Customer> update(@RequestBody Customer obj) {
         //  updates with addresses
-        Customer buildObj = CustomerFactory.buildCustomer(obj.getEmail(), obj.getName(), obj.getSurname(), obj.getMobileNo(), obj.getPassword(), obj.getAddresses());
+        Customer buildObj = CustomerFactory.buildCustomer(obj.getEmail(), obj.getName(), obj.getSurname(), obj.getMobileNo(), obj.getPassword());
         if(buildObj == null){
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(customerService.save(buildObj));
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.update(buildObj));
     }
 
 

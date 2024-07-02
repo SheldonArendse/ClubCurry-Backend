@@ -50,4 +50,10 @@ public class CustomerFactory {
         }
         return null;
     }
+    public static Customer buildCustomer(String username){
+        if(Validation.isValidEmail(username)){
+            return new Customer.Builder().setEmail(username).build();
+        }
+        return null;
+    }
 }
