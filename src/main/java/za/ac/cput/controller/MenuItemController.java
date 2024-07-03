@@ -1,0 +1,63 @@
+package za.ac.cput.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import za.ac.cput.domain.MenuItem;
+import za.ac.cput.facade.MenuItemMenu;
+import za.ac.cput.factory.MenuItemFactory;
+import za.ac.cput.service.MenuItemService;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/menuItem")
+public class MenuItemController {
+
+    private MenuItemService menuItemService;
+
+    private MenuItemMenu menuItemMenu;
+
+    @Autowired
+    public MenuItemController(MenuItemService menuItemService, MenuItemMenu menuItemMenu) {
+        this.menuItemService = menuItemService;
+        this.menuItemMenu = menuItemMenu;
+    }
+
+
+    @PostMapping("/save")
+    public ResponseEntity<MenuItem> save(@RequestBody MenuItem obj){
+        MenuItem builtObj = MenuItemFactory.buildMenuItem(obj.getName(), obj.getPrice(), obj.getMenuId(), obj.getIngredients());
+        if(builtObj == null){
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(menuItemMenu.canSave(builtObj));
+    }
+
+    @GetMapping("/read/{id}")
+    public ResponseEntity<MenuItem> read(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(menuItemService.read(id));
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Boolean> delete(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(menuItemService.delete(id));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<MenuItem> update(@RequestBody MenuItem obj){
+        MenuItem builtObj = MenuItemFactory.buildMenuItem(obj.getId(), obj.getName(), obj.getPrice(), obj.getMenuId(), obj.getIngredients());
+
+        if(builtObj == null){
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(menuItemMenu.canUpdateMenu(builtObj));
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<MenuItem>> getAll(){
+        return ResponseEntity.status(HttpStatus.OK).body(menuItemService.getAll());
+    }
+}
