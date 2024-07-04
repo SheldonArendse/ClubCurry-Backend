@@ -2,6 +2,7 @@ package za.ac.cput.facade;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import za.ac.cput.domain.Menu;
 import za.ac.cput.domain.MenuItem;
 import za.ac.cput.service.MenuItemService;
 import za.ac.cput.service.MenuService;
@@ -19,16 +20,22 @@ public class MenuItemMenu {
     }
 
     public MenuItem canSave(MenuItem obj){
-        if(menuService.read(obj.getMenuId().getId()) == null){
+        Menu m1 = menuService.read(obj.getMenuId().getId());
+        if(m1 == null){
             return null;
         }
-        return menuItemService.save(obj);
+        MenuItem m2 = new MenuItem.Builder().copy(obj).setMenuId(m1).build();
+        return menuItemService.save(m2);
     }
 
     public MenuItem canUpdateMenu(MenuItem obj){
-        if(menuService.read(obj.getMenuId().getId()) == null){
+        System.out.println(obj);
+        Menu m1 = menuService.read(obj.getMenuId().getId());
+        System.out.println(m1);
+        if(m1 == null){
             return null;
         }
-        return menuItemService.update(obj);
+        MenuItem m2 = new MenuItem.Builder().copy(obj).setMenuId(m1).build();
+        return menuItemService.update(m2);
     }
 }

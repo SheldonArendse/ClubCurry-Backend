@@ -29,11 +29,16 @@ public class MenuItemController {
 
     @PostMapping("/save")
     public ResponseEntity<MenuItem> save(@RequestBody MenuItem obj){
-        MenuItem builtObj = MenuItemFactory.buildMenuItem(obj.getName(), obj.getPrice(), obj.getMenuId(), obj.getIngredients());
+        MenuItem builtObj = MenuItemFactory.buildMenuItem(obj.getName(), obj.getPrice(), obj.getMenuId());
         if(builtObj == null){
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(menuItemMenu.canSave(builtObj));
+        MenuItem m1 = menuItemMenu.canSave(builtObj);
+
+        if(m1 == null){
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(m1);
     }
 
     @GetMapping("/read/{id}")
@@ -41,19 +46,24 @@ public class MenuItemController {
         return ResponseEntity.status(HttpStatus.OK).body(menuItemService.read(id));
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(menuItemService.delete(id));
     }
 
     @PutMapping("/update")
     public ResponseEntity<MenuItem> update(@RequestBody MenuItem obj){
-        MenuItem builtObj = MenuItemFactory.buildMenuItem(obj.getId(), obj.getName(), obj.getPrice(), obj.getMenuId(), obj.getIngredients());
+        MenuItem builtObj = MenuItemFactory.buildMenuItem(obj.getId(), obj.getName(), obj.getPrice(), obj.getMenuId());
 
         if(builtObj == null){
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(menuItemMenu.canUpdateMenu(builtObj));
+
+        MenuItem m1 = menuItemMenu.canUpdateMenu(builtObj);
+        if(m1 == null){
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(m1);
     }
 
     @GetMapping("/getAll")

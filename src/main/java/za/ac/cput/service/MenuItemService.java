@@ -48,6 +48,6 @@ public class MenuItemService implements IMenuItemService {
 
     @Override
     public List<MenuItem> getAll() {
-        return null;
+        return menuItemRepo.findAll();
     }
 }
