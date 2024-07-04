@@ -2,6 +2,7 @@ package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import za.ac.cput.domain.Ingredient;
 import za.ac.cput.domain.MenuItem;
 import za.ac.cput.repository.MenuItemRepo;
 import za.ac.cput.service.interfaces.IMenuItemService;
@@ -49,5 +50,10 @@ public class MenuItemService implements IMenuItemService {
     @Override
     public List<MenuItem> getAll() {
         return menuItemRepo.findAll();
+    }
+
+    @Override
+    public List<MenuItem> findAllByIngredientsIsContaining(Ingredient obj) {
+        return menuItemRepo.findAllByIngredientsIsContaining(obj);
     }
 }

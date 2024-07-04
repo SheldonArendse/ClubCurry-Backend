@@ -38,4 +38,8 @@ public class MenuItemMenu {
         MenuItem m2 = new MenuItem.Builder().copy(obj).setMenuId(m1).build();
         return menuItemService.update(m2);
     }
+    public boolean validMenu(MenuItem obj){
+        Menu m1 = menuService.read(obj.getMenuId().getId());
+        return m1 != null;
+    }
 }

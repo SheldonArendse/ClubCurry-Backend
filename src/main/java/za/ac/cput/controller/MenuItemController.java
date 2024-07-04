@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.MenuItem;
+import za.ac.cput.facade.IngredientMenuItem;
 import za.ac.cput.facade.MenuItemMenu;
 import za.ac.cput.factory.MenuItemFactory;
 import za.ac.cput.service.MenuItemService;
@@ -20,11 +21,15 @@ public class MenuItemController {
 
     private MenuItemMenu menuItemMenu;
 
+    private IngredientMenuItem ingredientMenuItem;
+
     @Autowired
-    public MenuItemController(MenuItemService menuItemService, MenuItemMenu menuItemMenu) {
+    public MenuItemController(MenuItemService menuItemService, MenuItemMenu menuItemMenu, IngredientMenuItem ingredientMenuItem) {
         this.menuItemService = menuItemService;
         this.menuItemMenu = menuItemMenu;
+        this.ingredientMenuItem = ingredientMenuItem;
     }
+
 
 
     @PostMapping("/save")
@@ -66,8 +71,22 @@ public class MenuItemController {
         return ResponseEntity.status(HttpStatus.OK).body(m1);
     }
 
+    @PutMapping("/updateWithIngredients")
+    public ResponseEntity<MenuItem> updateWithIngredients(@RequestBody MenuItem obj){
+        MenuItem m1 = MenuItemFactory.buildMenuItem(obj.getId(), obj.getName(),obj.getPrice(), obj.getMenuId(), obj.getIngredients());
+        if(m1 == null){
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
+        if(menuItemMenu.validMenu(obj)){
+            return ResponseEntity.status(HttpStatus.OK).body(ingredientMenuItem.validIngredients(obj));
+        }
+        return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+    }
+
     @GetMapping("/getAll")
     public ResponseEntity<List<MenuItem>> getAll(){
         return ResponseEntity.status(HttpStatus.OK).body(menuItemService.getAll());
     }
+
+
 }
