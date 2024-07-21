@@ -1,7 +1,6 @@
 package za.ac.cput.factory;
 
 import za.ac.cput.domain.Cart;
-import za.ac.cput.domain.Chef;
 import za.ac.cput.domain.Orders;
 import za.ac.cput.domain.enums.CollectionType;
 import za.ac.cput.domain.enums.PaymentMethod;

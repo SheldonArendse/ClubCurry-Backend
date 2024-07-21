@@ -30,7 +30,7 @@ public class Orders {
     private CollectionType collectionType;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Chef preparedBy;
+    private GeneralStaff preparedBy;
 
     protected Orders(){}
 
@@ -78,7 +78,7 @@ public class Orders {
         return collectionType;
     }
 
-    public Chef getPreparedBy() {
+    public GeneralStaff getPreparedBy() {
         return preparedBy;
     }
 
@@ -127,7 +127,7 @@ public class Orders {
 
         private CollectionType collectionType;
 
-        private Chef preparedBy;
+        private GeneralStaff preparedBy;
 
         public Builder setId(long id) {
             this.id = id;
@@ -169,7 +169,7 @@ public class Orders {
             return this;
         }
 
-        public Builder setPreparedBy(Chef preparedBy) {
+        public Builder setPreparedBy(GeneralStaff preparedBy) {
             this.preparedBy = preparedBy;
             return this;
         }

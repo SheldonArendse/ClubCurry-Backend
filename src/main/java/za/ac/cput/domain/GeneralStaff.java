@@ -6,43 +6,22 @@ import za.ac.cput.domain.enums.ExpertLevel;
 import java.util.Objects;
 
 @Entity
-public class Chef extends Employee{
-    private ExpertLevel expertLevel;
+public class GeneralStaff extends Employee{
 
-    protected Chef(){}
+    protected GeneralStaff(){}
 
-    public Chef(Builder obj){
+    public GeneralStaff(Builder obj){
         this.id = obj.id;
         this.name = obj.name;
         this.surname = obj.surname;
         this.password = obj.password;
         this.username = obj.username;
-        this.expertLevel = obj.expertLevel;
-    }
-
-    public ExpertLevel getExpertLevel() {
-        return expertLevel;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Chef chef = (Chef) o;
-        return expertLevel == chef.expertLevel;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), expertLevel);
     }
 
     @Override
     public String toString() {
         return "Chef{" +
-                "expertLevel=" + expertLevel +
-                ", id='" + id + '\'' +
+                "  id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", username='" + username + '\'' +
@@ -54,8 +33,6 @@ public class Chef extends Employee{
         private String id;
 
         private String name, surname, username, password;
-
-        private ExpertLevel expertLevel;
 
         public Builder setId(String id) {
             this.id = id;
@@ -82,23 +59,17 @@ public class Chef extends Employee{
             return this;
         }
 
-        public Builder setExpertLevel(ExpertLevel expertLevel) {
-            this.expertLevel = expertLevel;
-            return this;
-        }
-
-        public Builder copy(Chef obj){
+        public Builder copy(GeneralStaff obj){
             this.id = obj.id;
             this.name = obj.name;
             this.surname = obj.surname;
             this.password = obj.password;
             this.username = obj.username;
-            this.expertLevel = obj.expertLevel;
             return this;
         }
 
-        public Chef build(){
-            return new Chef(this);
+        public GeneralStaff build(){
+            return new GeneralStaff(this);
         }
     }
 }
