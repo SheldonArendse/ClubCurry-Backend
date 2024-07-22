@@ -50,4 +50,10 @@ public class GenStaffService implements IGenStaffService {
     public List<GeneralStaff> getAll() {
         return genStaffRepo.findAll();
     }
+
+    @Override
+    public Boolean findByUsername(String username) {
+        GeneralStaff guy = genStaffRepo.findByUsername(username);
+        return guy != null;
+    }
 }

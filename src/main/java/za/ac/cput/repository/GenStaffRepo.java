@@ -6,4 +6,6 @@ import za.ac.cput.domain.GeneralStaff;
 
 @Repository
 public interface GenStaffRepo extends JpaRepository<GeneralStaff, String> {
+
+    public GeneralStaff findByUsername(String username);
 }
