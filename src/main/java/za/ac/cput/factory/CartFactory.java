@@ -20,4 +20,10 @@ public class CartFactory {
         }
         return null;
     }
+    public static Cart buildCart(Customer customer){
+        if(customer != null){
+            return new Cart.Builder().setCustomer(customer).build();
+        }
+        return null;
+    }
 }

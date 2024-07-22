@@ -20,8 +20,8 @@ public class GeneralStaff extends Employee{
 
     @Override
     public String toString() {
-        return "Chef{" +
-                "  id='" + id + '\'' +
+        return "GeneralStaff{" +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", username='" + username + '\'' +

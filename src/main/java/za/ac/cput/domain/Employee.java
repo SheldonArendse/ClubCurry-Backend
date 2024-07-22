@@ -11,8 +11,10 @@ import java.util.Objects;
 public class Employee {
     @Id
     protected String id;
+    @Column(unique = true)
+    protected String username;
 
-    protected String name, surname, username, password;
+    protected String name, surname, password;
 
     protected Employee(){}
 
