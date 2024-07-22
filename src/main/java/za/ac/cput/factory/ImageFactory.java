@@ -6,7 +6,7 @@ import za.ac.cput.utils.Validation;
 
 public class ImageFactory {
 
-    public static Image buildImage(MenuItem menuItem, byte[] imageData, String name, String type){
+    public static Image buildImage(MenuItem menuItem, String imageData, String name, String type){
         if(menuItem != null
                 && imageData != null
                 && Validation.isValidString(name)
@@ -19,7 +19,7 @@ public class ImageFactory {
         }
         return null;
     }
-    public static Image buildImage(long id, MenuItem menuItem, byte[] imageData, String name, String type){
+    public static Image buildImage(long id, MenuItem menuItem, String imageData, String name, String type){
         if(menuItem != null
                 && imageData != null
                 && Validation.isValidString(name)

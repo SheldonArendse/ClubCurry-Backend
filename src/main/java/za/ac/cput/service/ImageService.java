@@ -2,7 +2,10 @@ package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import za.ac.cput.domain.Image;
+import za.ac.cput.domain.MenuItem;
+import za.ac.cput.factory.ImageFactory;
 import za.ac.cput.repository.ImageRepo;
 import za.ac.cput.service.interfaces.IImageService;
 import za.ac.cput.service.interfaces.IService;

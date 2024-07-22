@@ -15,9 +15,7 @@ public class Image {
     @JoinColumn(name = "menu_item_id")
     private MenuItem itemId;
 
-    @Lob
-    @Column(name = "image_data", length = 1000)
-    private byte[] photo;
+    private String photo;
 
     private String name, type;
 
@@ -39,7 +37,7 @@ public class Image {
         return itemId;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
@@ -56,14 +54,12 @@ public class Image {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Image image = (Image) o;
-        return id == image.id && Objects.equals(itemId, image.itemId) && Arrays.equals(photo, image.photo) && Objects.equals(name, image.name) && Objects.equals(type, image.type);
+        return id == image.id && Objects.equals(itemId, image.itemId) && Objects.equals(photo, image.photo) && Objects.equals(name, image.name) && Objects.equals(type, image.type);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, itemId, name, type);
-        result = 31 * result + Arrays.hashCode(photo);
-        return result;
+        return Objects.hash(id, itemId, photo, name, type);
     }
 
     @Override
@@ -71,7 +67,7 @@ public class Image {
         return "Image{" +
                 "id=" + id +
                 ", itemId=" + itemId +
-                ", photo=" + Arrays.toString(photo) +
+                ", photo=" + photo +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 '}';
@@ -82,7 +78,7 @@ public class Image {
 
         private MenuItem itemId;
 
-        private byte[] photo;
+        private String photo;
 
         private String name, type;
 
@@ -96,7 +92,7 @@ public class Image {
             return this;
         }
 
-        public Builder setPhoto(byte[] photo) {
+        public Builder setPhoto(String photo) {
             this.photo = photo;
             return this;
         }
