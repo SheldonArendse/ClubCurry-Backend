@@ -1,13 +1,11 @@
 package za.ac.cput.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import za.ac.cput.domain.enums.Section;
 import za.ac.cput.domain.enums.Status;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.Objects;
 
 @Entity
@@ -16,7 +14,9 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long bookingId;
-    private Date time;
+    private String date;
+
+    private String time;
 
     private int tableNo;
 
@@ -24,22 +24,32 @@ public class Booking {
 
     private Status status;
 
+    @ManyToOne
+    private GeneralStaff bookedBy;
+
     protected Booking() {
     }
 
-    public Booking(Builder obj) {
+    public Booking(Builder obj){
         this.bookingId = obj.bookingId;
+        this.date = obj.date;
         this.time = obj.time;
         this.tableNo = obj.tableNo;
         this.sectionNo = obj.sectionNo;
         this.status = obj.status;
+        this.bookedBy = obj.bookedBy;
     }
+
 
     public long getBookingId() {
         return bookingId;
     }
 
-    public Date getTime() {
+    public String getDate() {
+        return date;
+    }
+
+    public String getTime() {
         return time;
     }
 
@@ -55,45 +65,62 @@ public class Booking {
         return status;
     }
 
+    public GeneralStaff getBookedBy() {
+        return bookedBy;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return bookingId == booking.bookingId && tableNo == booking.tableNo && sectionNo == booking.sectionNo && Objects.equals(time, booking.time) && status == booking.status;
+        return bookingId == booking.bookingId && tableNo == booking.tableNo && Objects.equals(date, booking.date) && Objects.equals(time, booking.time) && sectionNo == booking.sectionNo && status == booking.status && Objects.equals(bookedBy, booking.bookedBy);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookingId, time, tableNo, sectionNo, status);
+        return Objects.hash(bookingId, date, time, tableNo, sectionNo, status, bookedBy);
     }
 
     @Override
     public String toString() {
         return "Booking{" +
                 "bookingId=" + bookingId +
+                ", date=" + date +
                 ", time=" + time +
                 ", tableNo=" + tableNo +
                 ", sectionNo=" + sectionNo +
                 ", status=" + status +
+                ", bookedBy=" + bookedBy +
                 '}';
     }
 
     public static class Builder{
         private long bookingId;
-        private Date time;
+        private String date;
+
+        private String time;
 
         private int tableNo;
 
         private Section sectionNo;
+
         private Status status;
+
+        @ManyToOne
+        private GeneralStaff bookedBy;
 
         public Builder setBookingId(long bookingId) {
             this.bookingId = bookingId;
             return this;
         }
 
-        public Builder setTime(Date time) {
+        public Builder setDate(String date) {
+            this.date = date;
+            return this;
+        }
+
+        public Builder setTime(String time) {
             this.time = time;
             return this;
         }
@@ -113,12 +140,19 @@ public class Booking {
             return this;
         }
 
+        public Builder setBookedBy(GeneralStaff bookedBy) {
+            this.bookedBy = bookedBy;
+            return this;
+        }
+
         public Builder copy(Booking obj){
             this.bookingId = obj.bookingId;
+            this.date = obj.date;
             this.time = obj.time;
             this.tableNo = obj.tableNo;
             this.sectionNo = obj.sectionNo;
             this.status = obj.status;
+            this.bookedBy = obj.bookedBy;
             return this;
         }
 
