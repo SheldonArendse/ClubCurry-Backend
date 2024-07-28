@@ -17,7 +17,7 @@ public class Cart {
     private Customer customer;
 
     @OneToMany
-    private List<MenuItem> items;
+    private List<CartMenuItems> items;
 
     protected Cart(){}
 
@@ -35,7 +35,7 @@ public class Cart {
         return customer;
     }
 
-    public List<MenuItem> getItems() {
+    public List<CartMenuItems> getItems() {
         return items;
     }
 
@@ -64,7 +64,7 @@ public class Cart {
     public static class Builder{
         private long id;
         private Customer customer;
-        private List<MenuItem> items;
+        private List<CartMenuItems> items;
 
         public Builder setId(long id) {
             this.id = id;
@@ -76,7 +76,7 @@ public class Cart {
             return this;
         }
 
-        public Builder setItems(List<MenuItem> items) {
+        public Builder setItems(List<CartMenuItems> items) {
             this.items = items;
             return this;
         }

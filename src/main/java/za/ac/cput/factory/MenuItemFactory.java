@@ -52,18 +52,4 @@ public class MenuItemFactory {
         }
         return null;
     }
-
-    public static MenuItem buildMenuItem(String name, double price, Menu menu, int quantity, SpiceLevel spiceLevel, String note) {
-        if (Validation.isValidString(name) && price > 0 && menu != null && quantity > 0 && spiceLevel != null && note !=null) {
-            return new MenuItem.Builder()
-                    .setName(name)
-                    .setPrice(price)
-                    .setMenuId(menu)
-                    .setQuantity(quantity)
-                    .setSpiceLevel(spiceLevel)
-                    .setNote(note)
-                    .build();
-        }
-        return null;
-    }
 }
