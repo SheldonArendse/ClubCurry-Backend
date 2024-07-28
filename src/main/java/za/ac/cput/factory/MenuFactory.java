@@ -6,15 +6,15 @@ import za.ac.cput.utils.Validation;
 
 public class MenuFactory {
 
-    public static Menu buildMenu(String name, SpiceLevel spiceLevel){
+    public static Menu buildMenu(String name){
         if(Validation.isValidString(name)){
-            return new Menu.Builder().setName(name).setLevel(spiceLevel).build();
+            return new Menu.Builder().setName(name).build();
         }
         return null;
     }
-    public static Menu buildMenu(Long id, String name, SpiceLevel spiceLevel){
+    public static Menu buildMenu(Long id, String name){
         if(Validation.isValidString(name)){
-            return new Menu.Builder().setName(name).setLevel(spiceLevel).setId(id).build();
+            return new Menu.Builder().setName(name).setId(id).build();
         }
         return null;
     }

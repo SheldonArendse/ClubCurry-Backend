@@ -15,14 +15,12 @@ public class Menu {
 
     private String name;
 
-    private SpiceLevel level;
 
     protected Menu(){}
 
     public Menu(Builder obj) {
         this.id = obj.id;
         this.name = obj.name;
-        this.level = obj.level;
     }
 
     public long getId() {
@@ -33,21 +31,17 @@ public class Menu {
         return name;
     }
 
-    public SpiceLevel getLevel() {
-        return level;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Menu menu = (Menu) o;
-        return id == menu.id && Objects.equals(name, menu.name) && level == menu.level;
+        return id == menu.id && Objects.equals(name, menu.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, level);
+        return Objects.hash(id, name);
     }
 
     @Override
@@ -55,7 +49,6 @@ public class Menu {
         return "Menu{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", level=" + level +
                 '}';
     }
 
@@ -63,8 +56,6 @@ public class Menu {
         private long id;
 
         private String name;
-
-        private SpiceLevel level;
 
         public Builder setId(long id) {
             this.id = id;
@@ -76,15 +67,9 @@ public class Menu {
             return this;
         }
 
-        public Builder setLevel(SpiceLevel level) {
-            this.level = level;
-            return this;
-        }
-
         public Builder copy(Menu obj){
             this.id = obj.id;
             this.name = obj.name;
-            this.level = obj.level;
             return this;
         }
 

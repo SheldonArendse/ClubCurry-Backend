@@ -23,7 +23,7 @@ public class MenuController {
 
     @PostMapping("/save")
     public ResponseEntity<Menu> save(@RequestBody Menu obj){
-        Menu m1 = MenuFactory.buildMenu(obj.getName(), obj.getLevel());
+        Menu m1 = MenuFactory.buildMenu(obj.getName());
         if(m1 ==null){
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
         }
@@ -37,7 +37,7 @@ public class MenuController {
 
     @PutMapping("/update")
     public ResponseEntity<Menu> update(@RequestBody Menu obj){
-        Menu m1 = MenuFactory.buildMenu(obj.getId(), obj.getName(), obj.getLevel());
+        Menu m1 = MenuFactory.buildMenu(obj.getId(), obj.getName());
         if(m1 == null){
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
 
