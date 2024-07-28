@@ -5,16 +5,16 @@ import za.ac.cput.utils.Validation;
 
 public class IngredientFactory {
 
-    public static Ingredient buildIngredient(String name, int stock){
-        if(Validation.isValidString(name) && stock>=0){
-            return new Ingredient.Builder().setName(name).setStock(stock).build();
+    public static Ingredient buildIngredient(String name){
+        if(Validation.isValidString(name)){
+            return new Ingredient.Builder().setName(name).build();
         }
         return null;
     }
 
-    public static Ingredient buildIngredient(long id, String name, int stock){
-        if(Validation.isValidString(name) && stock>=0){
-            return new Ingredient.Builder().setName(name).setStock(stock).setId(id).build();
+    public static Ingredient buildIngredient(long id, String name){
+        if(Validation.isValidString(name)){
+            return new Ingredient.Builder().setName(name).setId(id).build();
         }
         return null;
     }

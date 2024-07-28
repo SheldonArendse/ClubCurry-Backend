@@ -28,7 +28,7 @@ public class IngredientController {
 
     @PostMapping("/save")
     public ResponseEntity<Ingredient> save(@RequestBody Ingredient obj){
-        Ingredient i1 = IngredientFactory.buildIngredient(obj.getName(), obj.getStock());
+        Ingredient i1 = IngredientFactory.buildIngredient(obj.getName());
         if(i1 == null){
             return ResponseEntity.status(HttpStatus.OK).body(null);
         }
@@ -42,7 +42,7 @@ public class IngredientController {
 
     @PutMapping("/update")
     public ResponseEntity<Ingredient> update(@RequestBody Ingredient obj){
-        Ingredient i1 = IngredientFactory.buildIngredient(obj.getId(),obj.getName(), obj.getStock());
+        Ingredient i1 = IngredientFactory.buildIngredient(obj.getId(),obj.getName());
         if(i1 == null){
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
         }
