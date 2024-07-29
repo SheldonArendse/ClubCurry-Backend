@@ -6,7 +6,6 @@ import za.ac.cput.domain.Ingredient;
 import za.ac.cput.domain.MenuItem;
 import za.ac.cput.repository.MenuItemRepo;
 import za.ac.cput.service.interfaces.IMenuItemService;
-import za.ac.cput.service.interfaces.IService;
 
 import java.util.List;
 
@@ -50,6 +49,11 @@ public class MenuItemService implements IMenuItemService {
     @Override
     public List<MenuItem> getAll() {
         return menuItemRepo.findAll();
+    }
+
+    @Override
+    public List<MenuItem> findAllByIdIsIn(List<Long> items) {
+        return menuItemRepo.findAllByIdIsIn(items);
     }
 
     @Override

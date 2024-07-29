@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.Cart;
+import za.ac.cput.facade.AddItemToCart;
 import za.ac.cput.facade.CustomerCart;
 import za.ac.cput.factory.CartFactory;
 import za.ac.cput.service.CartService;
@@ -17,11 +18,13 @@ public class CartController {
 
     private CartService cartService;
     private CustomerCart customerCart;
+    private AddItemToCart addItemToCart;
 
     @Autowired
-    public CartController(CartService cartService, CustomerCart customerCart) {
+    public CartController(CartService cartService, CustomerCart customerCart,AddItemToCart addItemToCart) {
         this.cartService = cartService;
         this.customerCart = customerCart;
+        this.addItemToCart = addItemToCart;
     }
 
     @PostMapping("/save")
@@ -46,6 +49,9 @@ public class CartController {
     public ResponseEntity<Cart> updateItems(@RequestBody Cart obj){
         Cart cart = cartService.read(obj.getId());
         if(cart == null){
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
+        if(addItemToCart.validItems(obj) == null){
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
         }
         Cart cartUpdate = new Cart.Builder().copy(cart).setItems(obj.getItems()).build();

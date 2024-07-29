@@ -6,6 +6,7 @@ import za.ac.cput.domain.MenuItem;
 import java.util.List;
 
 public interface IMenuItemService extends IService<MenuItem, Long>{
-    public List<MenuItem> findAllByIngredientsIsContaining(Ingredient obj);
 
+    public List<MenuItem> findAllByIdIsIn(List<Long> items);
+    public List<MenuItem> findAllByIngredientsIsContaining(Ingredient obj);
 }
