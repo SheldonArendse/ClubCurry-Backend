@@ -15,7 +15,7 @@ class CartFactoryTest {
 
         @Test
         void testBuildCartWithCustomerAndMenuItems_Passing() {
-            Customer customer = CustomerFactory.buildCustomer("mohs@gmail.com","Mo", "Zouheir", "0625460987", "Kl$dfmnjsjeS12"); // Assume this object is properly instantiated
+            Customer customer = CustomerFactory.buildCustomer("mohs@gmail.com","Mo", "Zouheir", "0625460987", "Kl$dfmnjsjeS12");
             List<CartMenuItems> menuItems = new ArrayList<>();
             menuItems.add(mock(CartMenuItems.class));
             Cart cart = CartFactory.buildCart(customer, menuItems);
