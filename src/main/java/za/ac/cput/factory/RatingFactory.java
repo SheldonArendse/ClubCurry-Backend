@@ -16,7 +16,7 @@ public class RatingFactory {
         return null;
     }
     public static Rating buildRating(Long id, Orders order, RatingStars foodQuality, RatingStars deliveryQuality){
-        if(order !=null && foodQuality !=null && deliveryQuality !=null){
+        if(id>0 && order !=null && foodQuality !=null && deliveryQuality !=null){
             return new Rating.Builder()
                     .setId(id)
                     .setOrder(order)

@@ -20,7 +20,7 @@ public class ImageFactory {
         return null;
     }
     public static Image buildImage(long id, MenuItem menuItem, String imageData, String name, String type){
-        if(menuItem != null
+        if(id>0 && menuItem != null
                 && imageData != null
                 && Validation.isValidString(name)
                 && Validation.isValidString(type)){
