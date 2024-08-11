@@ -53,4 +53,9 @@ public class ImageService implements IImageService {
     public List<Image> getAll() {
         return imageRepo.findAll();
     }
+
+    @Override
+    public Image findImageByItemId(MenuItem id) {
+        return imageRepo.findImageByItemId(id);
+    }
 }

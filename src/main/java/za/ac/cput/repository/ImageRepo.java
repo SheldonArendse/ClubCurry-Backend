@@ -10,4 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ImageRepo extends JpaRepository<Image, Long> {
+
+    public Image findImageByItemId(MenuItem id);
 }

@@ -29,6 +29,13 @@ public class MenuItemFactory {
         }
         return null;
     }
+    public static MenuItem buildMenuItem(Long id) {
+        if (id>0) {
+            return new MenuItem.Builder().setId(id)
+                    .build();
+        }
+        return null;
+    }
 
     public static MenuItem buildMenuItem(Long id, String name, double price, Menu menu, List<Ingredient> ingredients) {
         if (id > 0 && Validation.isValidString(name) && price > 0 && menu != null) {

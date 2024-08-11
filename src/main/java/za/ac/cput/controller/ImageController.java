@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import za.ac.cput.domain.Image;
+import za.ac.cput.domain.MenuItem;
 import za.ac.cput.facade.MenuItemImage;
+import za.ac.cput.factory.MenuItemFactory;
 import za.ac.cput.service.ImageService;
 
 import java.io.File;
@@ -72,5 +74,22 @@ public class ImageController {
     public ResponseEntity<List<Image>> getAll(){
         return ResponseEntity.status(HttpStatus.OK).body(imageService.getAll());
 
+    }
+
+    @GetMapping("/getByMenuId/{id}")
+    public ResponseEntity<byte[]> getByMenuId(@PathVariable MenuItem id){
+        MenuItem obj = MenuItemFactory.buildMenuItem(id.getId());
+
+        Image image = imageService.findImageByItemId(obj);
+        if(image == null){
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
+        try {
+            byte[] actImage = Files.readAllBytes(new File(image.getPhoto()).toPath());
+            return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(actImage);
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
     }
 }

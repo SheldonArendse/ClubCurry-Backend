@@ -7,4 +7,5 @@ import za.ac.cput.domain.MenuItem;
 import java.util.List;
 
 public interface IImageService extends IService<Image, Long> {
+    public Image findImageByItemId(MenuItem id);
 }
