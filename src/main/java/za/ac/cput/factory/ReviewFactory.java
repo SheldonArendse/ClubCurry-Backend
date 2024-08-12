@@ -15,7 +15,7 @@ public class ReviewFactory {
     }
 
     public static Review buildReview(long id, Rating rating, Customer customer,String note){
-        if( rating !=null && customer !=null && Validation.isValidString(note)){
+        if( id>0 && rating !=null && customer !=null && Validation.isValidString(note)){
             return new Review.Builder().setId(id).setRating(rating).setCustomer(customer).setNote(note).build();
         }
         return null;

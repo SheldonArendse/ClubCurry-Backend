@@ -2,6 +2,7 @@ package za.ac.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import za.ac.cput.domain.Ingredient;
 import za.ac.cput.domain.MenuItem;
 import za.ac.cput.repository.MenuItemRepo;
@@ -24,6 +25,7 @@ public class MenuItemService implements IMenuItemService {
         return menuItemRepo.save(obj);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public MenuItem read(Long aLong) {
         return menuItemRepo.findById(aLong).orElse(null);

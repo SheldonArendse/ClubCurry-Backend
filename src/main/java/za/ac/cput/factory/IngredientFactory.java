@@ -13,7 +13,7 @@ public class IngredientFactory {
     }
 
     public static Ingredient buildIngredient(long id, String name){
-        if(Validation.isValidString(name)){
+        if(id>0 && Validation.isValidString(name)){
             return new Ingredient.Builder().setName(name).setId(id).build();
         }
         return null;

@@ -38,7 +38,7 @@ public class MenuItemFactory {
     }
 
     public static MenuItem buildMenuItem(Long id, String name, double price, Menu menu, List<Ingredient> ingredients) {
-        if (Validation.isValidString(name) && price > 0 && menu != null) {
+        if (id > 0 && Validation.isValidString(name) && price > 0 && menu != null) {
             return new MenuItem.Builder()
                     .setId(id)
                     .setName(name)
