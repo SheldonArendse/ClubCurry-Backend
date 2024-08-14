@@ -59,4 +59,26 @@ public class MenuItemFactory {
         }
         return null;
     }
+
+    public static MenuItem buildMenuItem(String description, String name, double price, Menu menu) {
+        if (Validation.isValidString(name) && price > 0 && menu != null && description !=null && !description.isEmpty()) {
+            return new MenuItem.Builder()
+                    .setName(name).setDescription(description)
+                    .setPrice(price)
+                    .setMenuId(menu).build();
+        }
+        return null;
+    }
+    public static MenuItem buildMenuItem(Long id, String name, double price, Menu menu,String description, List<Ingredient> ingredients) {
+        if (id > 0 && Validation.isValidString(name) && price > 0 && menu != null&& description !=null && !description.isEmpty()) {
+            return new MenuItem.Builder()
+                    .setId(id).setDescription(description)
+                    .setName(name)
+                    .setPrice(price)
+                    .setIngredients(ingredients)
+                    .setMenuId(menu).build();
+        }
+        return null;
+    }
+
 }

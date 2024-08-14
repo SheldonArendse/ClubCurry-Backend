@@ -13,6 +13,7 @@ public class MenuItem {
     private long id;
 
     private String name;
+    private String description;
 
     private double price;
 
@@ -31,6 +32,11 @@ public class MenuItem {
         this.price = obj.price;
         this.menuId = obj.menuId;
         this.ingredients = obj.ingredients;
+        this.description = obj.description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public long getId() {
@@ -58,12 +64,12 @@ public class MenuItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MenuItem menuItem = (MenuItem) o;
-        return id == menuItem.id && Double.compare(price, menuItem.price) == 0 && Objects.equals(name, menuItem.name) && Objects.equals(menuId, menuItem.menuId) && Objects.equals(ingredients, menuItem.ingredients);
+        return id == menuItem.id && Double.compare(price, menuItem.price) == 0 && Objects.equals(name, menuItem.name) && Objects.equals(description, menuItem.description) && Objects.equals(menuId, menuItem.menuId) && Objects.equals(ingredients, menuItem.ingredients);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, menuId, ingredients);
+        return Objects.hash(id, name, description, price, menuId, ingredients);
     }
 
     @Override
@@ -71,6 +77,7 @@ public class MenuItem {
         return "MenuItem{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", price=" + price +
                 ", menuId=" + menuId +
                 ", ingredients=" + ingredients +
@@ -82,7 +89,13 @@ public class MenuItem {
         private String name;
         private double price;
         private Menu menuId;
+        private String description;
         private List<Ingredient> ingredients;
+
+        public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
 
         public Builder setId(long id) {
             this.id = id;
@@ -115,6 +128,7 @@ public class MenuItem {
             this.price = obj.price;
             this.menuId = obj.menuId;
             this.ingredients = obj.ingredients;
+            this.description = obj.description;
             return this;
         }
 

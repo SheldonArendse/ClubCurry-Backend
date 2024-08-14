@@ -34,7 +34,7 @@ public class MenuItemController {
 
     @PostMapping("/save")
     public ResponseEntity<MenuItem> save(@RequestBody MenuItem obj){
-        MenuItem builtObj = MenuItemFactory.buildMenuItem(obj.getName(), obj.getPrice(), obj.getMenuId());
+        MenuItem builtObj = MenuItemFactory.buildMenuItem(obj.getDescription(), obj.getName(), obj.getPrice(), obj.getMenuId());
         if(builtObj == null){
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
         }
@@ -73,7 +73,7 @@ public class MenuItemController {
 
     @PutMapping("/updateWithIngredients")
     public ResponseEntity<MenuItem> updateWithIngredients(@RequestBody MenuItem obj){
-        MenuItem m1 = MenuItemFactory.buildMenuItem(obj.getId(), obj.getName(),obj.getPrice(), obj.getMenuId(), obj.getIngredients());
+        MenuItem m1 = MenuItemFactory.buildMenuItem(obj.getId(), obj.getName(),obj.getPrice(), obj.getMenuId(), obj.getDescription(),obj.getIngredients());
         if(m1 == null){
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
         }
