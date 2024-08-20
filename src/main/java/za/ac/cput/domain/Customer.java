@@ -1,18 +1,9 @@
 package za.ac.cput.domain;
 
-/*
-Customer.Java
-Customer Class
-Author: Aa'ishah Van Witt
-Date:  17 May 2024
- */
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import org.springframework.context.PayloadApplicationEvent;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,106 +12,97 @@ public class Customer {
 
     @Id
     private String email;
-    private String firstName;
-    private String lastName;
-    private String mobileNumber;
-    private String password;
-    @OneToMany
-    private List<Address> custAddress;
-    @OneToMany
-    private List<PaymentMethod> paymentMethod;
+
+    private String name, surname, mobileNo, password;
+
+    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Address> addresses;
 
     protected Customer(){}
 
-    public Customer(Builder build) {
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.mobileNumber = mobileNumber;
-        this.password = password;
-        this.custAddress = custAddress;
-        this.paymentMethod = paymentMethod;
+    public Customer(Builder obj) {
+        this.email = obj.email;
+        this.name = obj.name;
+        this.surname = obj.surname;
+        this.mobileNo = obj.mobileNo;
+        this.password = obj.password;
+        this.addresses =obj.addresses;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public String getMobileNumber() {
-        return mobileNumber;
+    public String getMobileNo() {
+        return mobileNo;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public List<Address> getCustAddress() {
-        return custAddress;
-    }
-
-    public List<PaymentMethod> getPaymentMethod() {
-        return paymentMethod;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Customer customer)) return false;
-        return Objects.equals(email, customer.email) && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(mobileNumber, customer.mobileNumber) && Objects.equals(password, customer.password) && Objects.equals(custAddress, customer.custAddress) && Objects.equals(paymentMethod, customer.paymentMethod);
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(email, customer.email) && Objects.equals(name, customer.name) && Objects.equals(surname, customer.surname) && Objects.equals(mobileNo, customer.mobileNo) && Objects.equals(password, customer.password) && Objects.equals(addresses, customer.addresses);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, firstName, lastName, mobileNumber, password, custAddress, paymentMethod);
+        return Objects.hash(email, name, surname, mobileNo, password, addresses);
     }
 
     @Override
     public String toString() {
         return "Customer{" +
                 "email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", mobileNo='" + mobileNo + '\'' +
                 ", password='" + password + '\'' +
-                ", custAddress=" + custAddress +
-                ", paymentMethod=" + paymentMethod +
+                ", addresses=" + addresses +
                 '}';
     }
 
     public static class Builder{
         private String email;
-        private String firstName;
-        private String lastName;
-        private String mobileNumber;
-        private String password;
-        private List<Address> custAddress;
-        private List<PaymentMethod> paymentMethod;
+
+        private String name, surname, mobileNo, password;
+
+        private List<Address> addresses;
 
         public Builder setEmail(String email) {
             this.email = email;
             return this;
         }
 
-        public Builder setFirstName(String firstName) {
-            this.firstName = firstName;
+        public Builder setName(String name) {
+            this.name = name;
             return this;
         }
 
-        public Builder setLastName(String lastName) {
-            this.lastName = lastName;
+        public Builder setSurname(String surname) {
+            this.surname = surname;
             return this;
         }
 
-        public Builder setMobileNumber(String mobileNumber) {
-            this.mobileNumber = mobileNumber;
+        public Builder setMobileNo(String mobileNo) {
+            this.mobileNo = mobileNo;
             return this;
         }
 
@@ -129,26 +111,21 @@ public class Customer {
             return this;
         }
 
-        public Builder setCustAddress(List<Address> custAddress) {
-            this.custAddress = custAddress;
-            return this;
-        }
-
-        public Builder setPaymentMethod(List<PaymentMethod> paymentMethod) {
-            this.paymentMethod = paymentMethod;
+        public Builder setAddresses(List<Address> addresses) {
+            this.addresses = addresses;
             return this;
         }
 
         public Builder copy(Customer obj){
             this.email = obj.email;
-            this.firstName = obj.firstName;
-            this.lastName = obj.lastName;
-            this.mobileNumber = obj.mobileNumber;
+            this.name = obj.name;
+            this.surname = obj.surname;
+            this.mobileNo = obj.mobileNo;
             this.password = obj.password;
-            this.custAddress = obj.custAddress;
-            this.paymentMethod = obj.paymentMethod;
+            this.addresses =obj.addresses;
             return this;
         }
+
         public Customer build(){
             return new Customer(this);
         }

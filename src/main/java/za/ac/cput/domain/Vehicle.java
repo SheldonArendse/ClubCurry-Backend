@@ -1,34 +1,30 @@
 package za.ac.cput.domain;
 
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-//Aaniquah Dicks
+
 import java.util.Objects;
 
 @Entity
-
 public class Vehicle {
+
     @Id
-   private String registrationNumber;
-   private String model;
-   private String color;
-    private String make;
+    private long id;
 
-    public Vehicle() {
+    private String model, color, make;
 
-    }
-    public Vehicle(Builder builder) {
-        this.registrationNumber = builder.registrationNumber;
-        this.model = builder.model;
-        this.color = builder.color;
-        this.make = builder.make;
+    protected Vehicle(){}
+
+    public Vehicle(Builder obj) {
+        this.id = obj.id;
+        this.model = obj.model;
+        this.color = obj.color;
+        this.make = obj.make;
     }
 
-    public String getRegistration() {
-        return registrationNumber
-                ;
+    public long getId() {
+        return id;
     }
 
     public String getModel() {
@@ -48,18 +44,18 @@ public class Vehicle {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vehicle vehicle = (Vehicle) o;
-        return Objects.equals(registrationNumber, vehicle.registrationNumber) && Objects.equals(model, vehicle.model) && Objects.equals(color, vehicle.color) && Objects.equals(make, vehicle.make);
+        return id == vehicle.id && Objects.equals(model, vehicle.model) && Objects.equals(color, vehicle.color) && Objects.equals(make, vehicle.make);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(registrationNumber, model, color, make);
+        return Objects.hash(id, model, color, make);
     }
 
     @Override
     public String toString() {
         return "Vehicle{" +
-                "registration='" + registrationNumber + '\'' +
+                "id=" + id +
                 ", model='" + model + '\'' +
                 ", color='" + color + '\'' +
                 ", make='" + make + '\'' +
@@ -67,13 +63,12 @@ public class Vehicle {
     }
 
     public static class Builder{
-        String registrationNumber;
-        String model;
-        String color;
-        String make;
+        private long id;
 
-        public Builder setRegistration(String registrationNumber) {
-            this.registrationNumber = registrationNumber;
+        private String model, color, make;
+
+        public Builder setId(long id) {
+            this.id = id;
             return this;
         }
 
@@ -93,7 +88,7 @@ public class Vehicle {
         }
 
         public Builder copy(Vehicle obj){
-            this.registrationNumber = obj.registrationNumber;
+            this.id = obj.id;
             this.model = obj.model;
             this.color = obj.color;
             this.make = obj.make;

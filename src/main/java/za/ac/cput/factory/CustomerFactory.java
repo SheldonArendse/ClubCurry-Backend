@@ -2,64 +2,58 @@ package za.ac.cput.factory;
 
 import za.ac.cput.domain.Address;
 import za.ac.cput.domain.Customer;
-import za.ac.cput.domain.PaymentMethod;
-import za.ac.cput.util.CustomerHelper;
+import za.ac.cput.utils.Validation;
 
 import java.util.List;
 
-/*
-Customer.Java
-Customer Factory Class
-Author: Aa'ishah Van Witt
-Date:  17 May 2024
- */
 public class CustomerFactory {
 
-    public static Customer buildCustomer(String email, String firstName, String lastName, String mobileNumber, String password, List<Address> custAddress, List<PaymentMethod> paymentMethod) {
-        if (CustomerHelper.testEmail(email) ||
-                CustomerHelper.testString(firstName) ||
-                CustomerHelper.testString(lastName) ||
-                CustomerHelper.testValidMobile(mobileNumber) ||
-                CustomerHelper.testString(password) ||
-                CustomerHelper.testListAddress(custAddress) ||
-                CustomerHelper.testListPayMethod(paymentMethod)) {
-return  null;
+    public static Customer buildCustomer(String email, String name, String surname, String mobileNo, String password, List<Address> addresses){
+        if(Validation.isValidEmail(email)
+                && !addresses.isEmpty()
+                && Validation.isValidString(name)
+                && Validation.isValidString(surname)
+                && Validation.isValidMobileNo(mobileNo)
+                && Validation.isValidPassword(password)
+                && !addresses.isEmpty()){
+            return new Customer.Builder()
+                    .setEmail(email)
+                    .setName(name)
+                    .setSurname(surname)
+                    .setMobileNo(mobileNo)
+                    .setPassword(password)
+                    .setAddresses(addresses)
+                    .build();
         }
-        return new Customer.Builder().setEmail(email)
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setMobileNumber(mobileNumber)
-                .setPassword(password)
-                .setCustAddress(custAddress)
-                .setPaymentMethod(paymentMethod)
-                .build();
+        return null;
+    }
+    public static Customer buildCustomer(String email, String name, String surname, String mobileNo, String password){
+        if(Validation.isValidEmail(email)
+                && Validation.isValidString(name)
+                && Validation.isValidString(surname)
+                && Validation.isValidMobileNo(mobileNo)
+                && Validation.isValidPassword(password)){
+            return new Customer.Builder()
+                    .setEmail(email)
+                    .setName(name)
+                    .setSurname(surname)
+                    .setMobileNo(mobileNo)
+                    .setPassword(password)
+                    .build();
+        }
+        return null;
     }
 
-    public static Customer buildCustomer(String firstName, String lastName, String mobileNumber, String password, List<Address> custAddress, List<PaymentMethod> paymentMethod) {
-        if (
-                CustomerHelper.testString(firstName) ||
-                CustomerHelper.testString(lastName) ||
-                CustomerHelper.testValidMobile(mobileNumber) ||
-                CustomerHelper.testString(password) ||
-                CustomerHelper.testListAddress(custAddress) ||
-                CustomerHelper.testListPayMethod(paymentMethod)) {
-            return  null;
+    public static Customer buildCustomer(String username,String password){
+        if(Validation.isValidEmail(username) && Validation.isValidPassword(password)){
+            return new Customer.Builder().setEmail(username).setPassword(password).build();
         }
-        return new Customer.Builder()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setMobileNumber(mobileNumber)
-                .setPassword(password)
-                .setCustAddress(custAddress)
-                .setPaymentMethod(paymentMethod)
-                .build();
+        return null;
     }
-    public static Customer buildCustomer(String email) {
-        if (CustomerHelper.testEmail(email)){
-            return  null;
+    public static Customer buildCustomer(String username){
+        if(Validation.isValidEmail(username)){
+            return new Customer.Builder().setEmail(username).build();
         }
-        return new Customer.Builder()
-                .setEmail(email)
-                .build();
+        return null;
     }
 }

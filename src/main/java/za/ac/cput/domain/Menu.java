@@ -1,38 +1,34 @@
 package za.ac.cput.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import za.ac.cput.domain.enums.SpiceLevel;
 
 import java.util.Objects;
 
 @Entity
 public class Menu {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String menuId;
-    private String menuName;
-    private String SpiceLevel;
+    @Column(name = "menu_id")
+    private long id;
+
+    private String name;
+
 
     protected Menu(){}
 
-    private Menu(Builder obj){
-        this.menuId = obj.menuId;
-        this.menuName = obj.menuName;
-        this.SpiceLevel = obj.SpiceLevel;
+    public Menu(Builder obj) {
+        this.id = obj.id;
+        this.name = obj.name;
     }
 
-    public String getMenuId() {
-        return menuId;
+    public long getId() {
+        return id;
     }
 
-    public String getMenuName() {
-        return menuName;
-    }
-
-    public String getSpiceLevel() {
-        return SpiceLevel;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -40,47 +36,40 @@ public class Menu {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Menu menu = (Menu) o;
-        return Objects.equals(menuId, menu.menuId) && Objects.equals(menuName, menu.menuName) && Objects.equals(SpiceLevel, menu.SpiceLevel);
+        return id == menu.id && Objects.equals(name, menu.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(menuId, menuName, SpiceLevel);
+        return Objects.hash(id, name);
     }
 
     @Override
     public String toString() {
         return "Menu{" +
-                "menuId='" + menuId + '\'' +
-                ", menuName='" + menuName + '\'' +
-                ", SpiceLevel='" + SpiceLevel + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 
     public static class Builder{
-        private String menuId;
-        private String menuName;
-        private String SpiceLevel;
+        private long id;
 
-        public Builder setMenuId(String menuId) {
-            this.menuId = menuId;
+        private String name;
+
+        public Builder setId(long id) {
+            this.id = id;
             return this;
         }
 
-        public Builder setMenuName(String menuName) {
-            this.menuName = menuName;
-            return this;
-        }
-
-        public Builder setSpiceLevel(String spiceLevel) {
-            SpiceLevel = spiceLevel;
+        public Builder setName(String name) {
+            this.name = name;
             return this;
         }
 
         public Builder copy(Menu obj){
-            this.menuId = obj.menuId;
-            this.menuName = obj.menuName;
-            this.SpiceLevel = obj.SpiceLevel;
+            this.id = obj.id;
+            this.name = obj.name;
             return this;
         }
 

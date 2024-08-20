@@ -1,11 +1,15 @@
 package za.ac.cput.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.Customer;
 import za.ac.cput.factory.CustomerFactory;
 import za.ac.cput.service.CustomerService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,36 +19,71 @@ public class CustomerController {
     private CustomerService customerService;
 
     @Autowired
-    public CustomerController(CustomerService customerService){
+    public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
-    @PostMapping("/create")
-    public Customer create(@RequestBody Customer obj){
-        Customer customer = CustomerFactory.buildCustomer(
-                obj.getEmail(),
-                obj.getFirstName(),
-                obj.getLastName(),
-                obj.getMobileNumber(),
-                obj.getPassword(),
-                obj.getCustAddress(),
-                obj.getPaymentMethod());
-        return customerService.create(obj);
+    @PostMapping("/save")
+    public ResponseEntity<Customer> save(@RequestBody Customer obj) {
+        // builds a customer with no addresses
+        Customer buildObj = CustomerFactory.buildCustomer(obj.getEmail(), obj.getName(), obj.getSurname(), obj.getMobileNo(), obj.getPassword());
+        Customer exists = customerService.read(obj.getEmail());
+        if (buildObj == null) {
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
+        if (exists != null) {
+            System.out.println(exists);
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.save(buildObj));
     }
 
-    @GetMapping("/read/{id}")
-    public Customer read(@PathVariable String id){
-        return customerService.read(id);
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Customer> read(@PathVariable String id) {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.read(id));
     }
 
-    @PostMapping("/delete/{id}")
-    public void delete(@PathVariable String id){
-        Customer customer =CustomerFactory.buildCustomer(id);
-        customerService.delete(customer);
+
+    @PutMapping("/update")
+    public ResponseEntity<Customer> update(@RequestBody Customer obj) {
+        //  updates with addresses
+        Customer buildObj = CustomerFactory.buildCustomer(obj.getEmail(), obj.getName(), obj.getSurname(), obj.getMobileNo(), obj.getPassword());
+        Customer exists = customerService.read(obj.getEmail());
+
+        if (buildObj == null) {
+            System.out.println(1);
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
+
+        if (exists != null) {
+            Customer updated = customerService.update(buildObj);
+            System.out.println(updated.getAddresses());
+            return ResponseEntity.status(HttpStatus.OK).body(customerService.read(updated.getEmail()));
+        }
+        System.out.println(exists);
+        return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
     }
 
-  @PostMapping("/getAll")
-    public List<Customer> getAll(){
-        return customerService.getAll();
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable String id) {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.delete(id));
+    }
+
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Customer>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.getAll());
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<Customer> login(@RequestBody Customer obj) {
+        Customer login = CustomerFactory.buildCustomer(obj.getEmail(), obj.getPassword());
+
+        if (login == null) {
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.findByEmailAndPassword(login.getEmail(), login.getPassword()));
     }
 }

@@ -1,30 +1,20 @@
 package za.ac.cput.factory;
 
 import za.ac.cput.domain.Vehicle;
-import za.ac.cput.util.DriverHelper;
-import za.ac.cput.util.Helper;
+import za.ac.cput.utils.Validation;
 
 public class VehicleFactory {
 
-    public static Vehicle createVehicle(String registrationNumber, String model, String color, String make) {
-        if (Helper.isNullOrEmpty(registrationNumber)
-                || Helper.isNullOrEmpty(model)
-                || Helper.isNullOrEmpty(color)
-                || Helper.isNullOrEmpty(make)) {
-            return null;
+    public static Vehicle buildVehicle(String make, String model, String color){
+        if(Validation.isValidString(make) && Validation.isValidString(model) && Validation.isValidString(color)){
+            return new Vehicle.Builder().setMake(make).setModel(model).setColor(color).build();
         }
-
-        if (!DriverHelper.testValidRegistrationNumber(registrationNumber)) {
-            return null;
+        return null;
+    }
+    public static Vehicle buildVehicle(long id, String make, String model, String color){
+        if(id>0 && Validation.isValidString(make) && Validation.isValidString(model) && Validation.isValidString(color)){
+            return new Vehicle.Builder().setId(id).setMake(make).setModel(model).setColor(color).build();
         }
-
-        Vehicle vehicle = new Vehicle.Builder()
-                .setRegistration(registrationNumber)
-                .setModel(model)
-                .setColor(color)
-                .setMake(make)
-                .build();
-
-        return vehicle;
+        return null;
     }
 }

@@ -1,50 +1,59 @@
 package za.ac.cput.factory;
 
-/*
-Customer.Java
-Address Factory Class
-Author: Aa'ishah Van Witt
-Date:  17 May 2024
- */
-
 import za.ac.cput.domain.Address;
-import za.ac.cput.util.CustomerHelper;
-import za.ac.cput.util.Helper;
+import za.ac.cput.domain.Customer;
+import za.ac.cput.domain.embedded.Suburb;
+import za.ac.cput.utils.Validation;
 
 public class AddressFactory {
-    public static Address buildAddress(Long addressCode, String streetName, String streetNumber, String addressSuburb, int postalCode, String city) {
-        if (CustomerHelper.testLong(addressCode) ||
-                CustomerHelper.testString(streetName) ||
-                CustomerHelper.testString(streetNumber) ||
-                CustomerHelper.testString(addressSuburb) ||
-                Helper.isNull(postalCode) ||
-                CustomerHelper.testString(city)) {
-            return null;
-        }
-        return new Address.Builder().setAddressCode(addressCode)
-                .setStreetName(streetName)
-                .setStreetNumber(streetNumber)
-                .setPostalCode(postalCode)
-                .setAddressSuburb(addressSuburb)
-                .setCity(city)
-                .build();
-    }
 
-    public static Address buildAddress(String streetName, String streetNumber, String addressSuburb, int postalCode, String city) {
-        if (
-                CustomerHelper.testString(streetName) ||
-                CustomerHelper.testString(streetNumber) ||
-                CustomerHelper.testString(addressSuburb) ||
-                Helper.isNull(postalCode) ||
-                CustomerHelper.testString(city)) {
-            return null;
+    public static Address buildAddress(String streetName, String streetNo, String suburbName, int postalCode, Customer customerId){
+        if(Validation.isValidString(streetName) && Validation.isValidEmail(customerId.getEmail())
+                && Validation.isValidStreetNo(streetNo)
+                && Validation.isValidString(suburbName)
+                && Validation.isValidPostalCode(postalCode)){
+
+            Suburb suburb = new Suburb.Builder()
+                    .setSuburbName(suburbName)
+                    .setPostalCode(postalCode)
+                    .build();
+
+            return new Address.Builder()
+                    .setStreetName(streetName)
+                    .setStreetNo(streetNo)
+                    .setSuburb(suburb)
+                    .setCustomerId(customerId)
+                    .build();
         }
-        return new Address.Builder()
-                .setStreetName(streetName)
-                .setStreetNumber(streetNumber)
-                .setPostalCode(postalCode)
-                .setAddressSuburb(addressSuburb)
-                .setCity(city)
-                .build();
+        return null;
+    }
+    public static Address buildAddress(Long id, String streetName, String streetNo, String suburbName, int postalCode){
+        if(Validation.isValidString(streetName)
+                && Validation.isValidStreetNo(streetNo)
+                && Validation.isValidString(suburbName)
+                && Validation.isValidPostalCode(postalCode)){
+
+            Suburb suburb = new Suburb.Builder()
+                    .setSuburbName(suburbName)
+                    .setPostalCode(postalCode)
+                    .build();
+
+            return new Address.Builder()
+                    .setId(id)
+                    .setStreetName(streetName)
+                    .setStreetNo(streetNo)
+                    .setSuburb(suburb)
+                    .build();
+        }
+        return null;
+    }
+    public static Address buildAddress(Long id,  Customer customerId){
+        if(Validation.isValidEmail(customerId.getEmail()) && Validation.isValidEmail(customerId.getEmail())){
+            return new Address.Builder()
+                    .setId(id)
+                    .setCustomerId(customerId)
+                    .build();
+        }
+        return null;
     }
 }

@@ -1,38 +1,35 @@
 package za.ac.cput.factory;
 
+import za.ac.cput.domain.Address;
 import za.ac.cput.domain.Delivery;
-import za.ac.cput.domain.TimeAllocation;
 import za.ac.cput.domain.Driver;
-import za.ac.cput.util.Helper;
+import za.ac.cput.domain.Orders;
 
-import java.sql.Time;
+import java.sql.Date;
 
 public class DeliveryFactory {
-    public static Delivery buildDelivery(String deliveryId, TimeAllocation deliveryTime, Boolean status, Driver driverId, Time deliveredAt, String deliveryNote) {
-        if(Helper.isNullOrEmpty(deliveryId)
-                ||  Helper.isNullOrEmpty(deliveryTime)
-                || Helper.isNullOrEmpty(status)
-                || Helper.isNullOrEmpty(driverId)
-                || Helper.isNullOrEmpty(deliveredAt))
-        {
-            return null;
-        }
-        return new Delivery.Builder()
-                .setDeliveryId(deliveryId)
-                .setDeliveryTime(deliveryTime)
-                .setStatus(status)
-                .setDriverId(driverId)
-                .setDeliveredAt(deliveredAt)
-                .setDeliveryNote(deliveryNote)
-                .build();
-    }
 
-    public static Delivery buildDelivery(String deliveryId) {
-        if (Helper.isNullOrEmpty(deliveryId)) {
-            return null;
+    public static Delivery buildDelivery(boolean delivered, Date completed, Driver driver, Orders order, Address address){
+        if(driver != null && order != null && address !=null){
+            return new Delivery.Builder()
+                    .setDelivered(delivered)
+                    .setCompleted(completed)
+                    .setDriver(driver)
+                    .setAddress(address)
+                    .setOrder(order).build();
         }
-        return new Delivery.Builder()
-                .setDeliveryId(deliveryId)
-                .build();
+        return null;
+    }
+    public static Delivery buildDelivery(Long id, boolean delivered, Date completed, Driver driver, Orders order, Address address){
+        if(driver != null && order != null && id>=0 && address !=null){
+            return new Delivery.Builder()
+                    .setId(id)
+                    .setDelivered(delivered)
+                    .setCompleted(completed)
+                    .setDriver(driver)
+                    .setAddress(address)
+                    .setOrder(order).build();
+        }
+        return null;
     }
 }

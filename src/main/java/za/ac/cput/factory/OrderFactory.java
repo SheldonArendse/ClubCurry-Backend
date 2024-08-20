@@ -1,28 +1,39 @@
 package za.ac.cput.factory;
 
-import za.ac.cput.domain.Order;
-import za.ac.cput.util.Helper;
+import za.ac.cput.domain.Cart;
+import za.ac.cput.domain.Orders;
+import za.ac.cput.domain.enums.CollectionType;
+import za.ac.cput.domain.enums.PaymentMethod;
 
-import java.time.LocalTime;
-import java.util.Date;
+import java.sql.Date;
 
 public class OrderFactory {
-    public static Order buildOrder(String orderId, LocalTime Ordered, Cart cart, Date dateOrdered, boolean Completed){
-        if(Helper.isNullOrEmpty(orderId)
-               || Helper.isNullOrEmpty(Ordered)
-               || Helper.isNullOrEmpty(cart)
-               || Helper.isNullOrEmpty(dateOrdered)
-               || Helper.isNullOrEmpty(Completed))
-            return null;
 
-        return new Order.Builder()
-                    .setOrderId(orderId)
-                    .setOrdered(Ordered)
+    public static Orders buildOrder(Date ordered, Cart cart, double total, Date orderWanted, boolean isComplete, PaymentMethod paymentMethod, CollectionType collectionType){
+        if(total < 0 && cart !=null && paymentMethod !=null && collectionType !=null){
+            return new Orders.Builder()
+                    .setOrdered(ordered)
                     .setCart(cart)
-                    .setDateOrdered(dateOrdered)
-                    .setCompleted(Completed)
-                    .build();
+                    .setTotal(total)
+                    .setOrderWanted(orderWanted)
+                    .setPaymentMethod(paymentMethod)
+                    .setComplete(isComplete)
+                    .setCollectionType(collectionType).build();
         }
-
+        return null;
     }
-
+    public static Orders buildOrder(Long id, Date ordered, Cart cart, double total, Date orderWanted, boolean isComplete, PaymentMethod paymentMethod, CollectionType collectionType){
+        if(total < 0 && cart !=null && paymentMethod !=null && collectionType !=null){
+            return new Orders.Builder()
+                    .setId(id)
+                    .setOrdered(ordered)
+                    .setCart(cart)
+                    .setTotal(total)
+                    .setOrderWanted(orderWanted)
+                    .setPaymentMethod(paymentMethod)
+                    .setComplete(isComplete)
+                    .setCollectionType(collectionType).build();
+        }
+        return null;
+    }
+}

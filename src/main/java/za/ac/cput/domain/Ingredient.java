@@ -9,30 +9,26 @@ import java.util.Objects;
 
 @Entity
 public class Ingredient {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String code;
+    private long id;
+
     private String name;
-    private int stock;
 
     protected Ingredient(){}
 
-    private Ingredient(Builder obj) {
-        this.code = obj.code;
+    public Ingredient(Builder obj) {
+        this.id = obj.id;
         this.name = obj.name;
-        this.stock =obj.stock;
     }
 
-    public String getCode() {
-        return code;
+    public long getId() {
+        return id;
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getStock() {
-        return stock;
     }
 
     @Override
@@ -40,30 +36,30 @@ public class Ingredient {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ingredient that = (Ingredient) o;
-        return stock == that.stock && Objects.equals(code, that.code) && Objects.equals(name, that.name);
+        return id == that.id && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, name, stock);
+        return Objects.hash(id, name);
     }
 
     @Override
     public String toString() {
         return "Ingredient{" +
-                "code='" + code + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
-                ", stock=" + stock +
                 '}';
     }
 
     public static class Builder{
-        private String code;
-        private String name;
-        private int stock;
+        private long id;
 
-        public Builder setCode(String code) {
-            this.code = code;
+        private String name;
+
+
+        public Builder setId(long id) {
+            this.id = id;
             return this;
         }
 
@@ -72,15 +68,9 @@ public class Ingredient {
             return this;
         }
 
-        public Builder setStock(int stock) {
-            this.stock = stock;
-            return this;
-        }
-
         public Builder copy(Ingredient obj){
-            this.code = obj.code;
+            this.id = obj.id;
             this.name = obj.name;
-            this.stock =obj.stock;
             return this;
         }
 

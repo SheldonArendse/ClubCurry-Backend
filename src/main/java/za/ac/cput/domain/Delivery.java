@@ -2,136 +2,142 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.*;
 
-import za.ac.cput.domain.Driver;
-
-import java.sql.Time;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
 public class Delivery {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
-    private String deliveryId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    private boolean delivered;
+
+    private Date completed;
+
+    @ManyToOne
+    private Driver driver;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="timer_id")
-    private TimeAllocation deliveryTime;
-    private Boolean status;
+    private Orders order;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="driver_id")
-    private Driver driverId;
-    private Time deliveredAt;
-    private String deliveryNote;
+    private Address address;
 
-    protected Delivery() {}
+    protected Delivery(){}
 
-    public Delivery(Builder builder) {
-        this.deliveryId = builder.deliveryId;
-        this.deliveryTime = builder.deliveryTime;
-        this.status = builder.status;
-        this.driverId = builder.driverId;
-        this.deliveredAt = builder.deliveredAt;
-        this.deliveryNote = builder.deliveryNote;
+    public Delivery(Builder obj) {
+        this.id = obj.id;
+        this.delivered = obj.delivered;
+        this.completed = obj.completed;
+        this.driver = obj.driver;
+        this.order = obj.order;
+        this.address = obj.address;
     }
 
-    public String getDeliveryId() {
-        return deliveryId;
+    public Address getAddress() {
+        return address;
     }
 
-    public TimeAllocation getDeliveryTime() {
-        return deliveryTime;
+    public long getId() {
+        return id;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public boolean isDelivered() {
+        return delivered;
     }
 
-    public Driver getDriverId() {
-        return driverId;
+    public Date getCompleted() {
+        return completed;
     }
 
-    public Time getDeliveredAt() {
-        return deliveredAt;
+    public Driver getDriver() {
+        return driver;
     }
 
-    public String getDeliveryNote() {
-        return deliveryNote;
+    public Orders getOrder() {
+        return order;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Delivery delivery)) return false;
-        return Objects.equals(getDeliveryId(), delivery.getDeliveryId()) && Objects.equals(getDeliveryTime(), delivery.getDeliveryTime()) && Objects.equals(getStatus(), delivery.getStatus()) && Objects.equals(getDriverId(), delivery.getDriverId()) && Objects.equals(getDeliveredAt(), delivery.getDeliveredAt()) && Objects.equals(getDeliveryNote(), delivery.getDeliveryNote());
+        if (o == null || getClass() != o.getClass()) return false;
+        Delivery delivery = (Delivery) o;
+        return id == delivery.id && delivered == delivery.delivered && Objects.equals(completed, delivery.completed) && Objects.equals(driver, delivery.driver) && Objects.equals(order, delivery.order) && Objects.equals(address, delivery.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDeliveryId(), getDeliveryTime(), getStatus(), getDriverId(), getDeliveredAt(), getDeliveryNote());
+        return Objects.hash(id, delivered, completed, driver, order, address);
     }
 
     @Override
     public String toString() {
-        return "Delivery" + "\n-----------------\n" +
-                "Delivery ID = " + deliveryId + "\n" +
-                "Delivery Time = " + deliveryTime + "\n" +
-                "Status = " + status + "\n" +
-                "Driver ID = " + driverId + "\n" +
-                "Delivered at = " + deliveredAt +
-                "Delivery Note = " + deliveryNote;
+        return "Delivery{" +
+                "id=" + id +
+                ", delivered=" + delivered +
+                ", completed=" + completed +
+                ", driver=" + driver +
+                ", order=" + order +
+                ", address=" + address +
+                '}';
     }
 
-    public static class Builder {
-        @Id
-        private String deliveryId;
-        @OneToOne
-        private TimeAllocation deliveryTime;
-        private Boolean status;
-        @OneToOne
-        private Driver driverId;
-        private Time deliveredAt;
-        private String deliveryNote;
+    public static class Builder{
+        private long id;
 
-        public Builder setDeliveryId(String deliveryId) {
-            this.deliveryId = deliveryId;
+        private boolean delivered;
+
+        private Date completed;
+
+        private Driver driver;
+
+        private Orders order;
+        private Address address;
+
+        public Builder setAddress(Address address) {
+            this.address = address;
             return this;
         }
 
-        public Builder setDeliveryTime(TimeAllocation deliveryTime) {
-            this.deliveryTime = deliveryTime;
+        public Builder setId(long id) {
+            this.id = id;
             return this;
         }
 
-        public Builder setStatus(Boolean status) {
-            this.status = status;
+        public Builder setDelivered(boolean delivered) {
+            this.delivered = delivered;
             return this;
         }
 
-        public Builder setDriverId(Driver driverId) {
-            this.driverId = driverId;
+        public Builder setCompleted(Date completed) {
+            this.completed = completed;
             return this;
         }
 
-        public Builder setDeliveredAt(Time deliveredAt) {
-            this.deliveredAt = deliveredAt;
+        public Builder setDriver(Driver driver) {
+            this.driver = driver;
             return this;
         }
 
-        public Builder setDeliveryNote(String deliveryNote) {
-            this.deliveryNote = deliveryNote;
+        public Builder setOrder(Orders order) {
+            this.order = order;
             return this;
         }
 
-        public Builder copy(Delivery obj) {
-            this.deliveryId = obj.deliveryId;
-            this.deliveryTime = obj.deliveryTime;
-            this.status = obj.status;
-            this.driverId = obj.driverId;
-            this.deliveredAt = obj.deliveredAt;
-            this.deliveryNote = obj.deliveryNote;
+        public Builder copy(Delivery obj){
+            this.id = obj.id;
+            this.delivered = obj.delivered;
+            this.completed = obj.completed;
+            this.driver = obj.driver;
+            this.order = obj.order;
+            this.address = obj.address;
             return this;
         }
 
-        public Delivery build() {
+        public Delivery build(){
             return new Delivery(this);
         }
     }

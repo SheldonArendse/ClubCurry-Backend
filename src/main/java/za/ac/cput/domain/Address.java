@@ -1,17 +1,8 @@
 package za.ac.cput.domain;
 
-/*
-Customer.Java
-Address Class
-Author: Aa'ishah Van Witt
-Date:  17 May 2024
- */
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import org.springframework.beans.factory.parsing.EmptyReaderEventListener;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+import za.ac.cput.domain.embedded.Suburb;
 
 import java.util.Objects;
 
@@ -20,70 +11,90 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long addressCode;
-    private String streetName;
-    private String streetNumber;
-    private String addressSuburb;
-    private int postalCode;
-    private String city;
+    private long id;
 
-    protected Address(){}
+    private String streetName, streetNo;
 
-    public Address(Builder build) {
-        this.addressCode = build.addressCode;
-        this.streetName = build.streetName;
-        this.streetNumber = build.streetNumber;
-        this.addressSuburb = build.addressSuburb;
-        this.postalCode = build.postalCode;
-        this.city = build.city;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="suburbName", column = @Column(name = "suburb_name")),
+            @AttributeOverride(name="postalCode", column = @Column(name = "suburb_postal_code"))
+    })
+    private Suburb suburb;
+
+    @JsonBackReference
+    @ManyToOne
+    private Customer customerId;
+
+    protected Address(){};
+
+    public Address(Builder obj) {
+        this.id = obj.id;
+        this.streetName = obj.streetName;
+        this.streetNo = obj.streetNo;
+        this.suburb = obj.suburb;
+        this.customerId = obj.customerId;
     }
 
-    public Long getAddressCode() {
-        return addressCode;
+    public Customer getCustomerId() {
+        return customerId;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getStreetName() {
         return streetName;
     }
 
-    public String getStreetNumber() {
-        return streetNumber;
+    public String getStreetNo() {
+        return streetNo;
     }
 
-    public String getAddressSuburb() {
-        return addressSuburb;
-    }
-
-    public int getPostalCode() {
-        return postalCode;
-    }
-
-    public String getCity() {
-        return city;
+    public Suburb getSuburb() {
+        return suburb;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Address address)) return false;
-        return postalCode == address.postalCode && Objects.equals(addressCode, address.addressCode) && Objects.equals(streetName, address.streetName) && Objects.equals(streetNumber, address.streetNumber) && Objects.equals(addressSuburb, address.addressSuburb) && Objects.equals(city, address.city);
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return id == address.id && Objects.equals(streetName, address.streetName) && Objects.equals(streetNo, address.streetNo) && Objects.equals(suburb, address.suburb) && Objects.equals(customerId, address.customerId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(addressCode, streetName, streetNumber, addressSuburb, postalCode, city);
+        return Objects.hash(id, streetName, streetNo, suburb, customerId);
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", streetName='" + streetName + '\'' +
+                ", streetNo='" + streetNo + '\'' +
+                ", suburb=" + suburb + '\'' +
+                ", customer=" + customerId +
+                '}';
     }
 
     public static class Builder{
-        private Long addressCode;
-        private String streetName;
-        private String streetNumber;
-        private String addressSuburb;
-        private int postalCode;
-        private String city;
+        private long id;
 
-        public Builder setAddressCode(Long addressCode) {
-            this.addressCode = addressCode;
+        private String streetName, streetNo;
+        private Suburb suburb;
+
+        private Customer customerId;
+
+        public Builder setCustomerId(Customer customerId) {
+            this.customerId = customerId;
+            return this;
+        }
+
+        public Builder setId(long id) {
+            this.id = id;
             return this;
         }
 
@@ -92,33 +103,22 @@ public class Address {
             return this;
         }
 
-        public Builder setStreetNumber(String streetNumber) {
-            this.streetNumber = streetNumber;
+        public Builder setStreetNo(String streetNo) {
+            this.streetNo = streetNo;
             return this;
         }
 
-        public Builder setAddressSuburb(String addressSuburb) {
-            this.addressSuburb = addressSuburb;
-            return this;
-        }
-
-        public Builder setPostalCode(int postalCode) {
-            this.postalCode = postalCode;
-            return this;
-        }
-
-        public Builder setCity(String city) {
-            this.city = city;
+        public Builder setSuburb(Suburb suburb) {
+            this.suburb = suburb;
             return this;
         }
 
         public Builder copy(Address obj){
-            this.addressCode = obj.addressCode;
+            this.id = obj.id;
             this.streetName = obj.streetName;
-            this.streetNumber = obj.streetNumber;
-            this.addressSuburb = obj.addressSuburb;
-            this.postalCode = obj.postalCode;
-            this.city = obj.city;
+            this.streetNo = obj.streetNo;
+            this.suburb = obj.suburb;
+            this.customerId = obj.customerId;
             return this;
         }
 
