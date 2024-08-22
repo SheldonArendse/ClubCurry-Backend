@@ -88,5 +88,17 @@ public class MenuItemController {
         return ResponseEntity.status(HttpStatus.OK).body(menuItemService.getAll());
     }
 
+    @GetMapping("/getItemByDetails/{description}/{name}/{price}")
+    public ResponseEntity<MenuItem> getItemByDetails(@PathVariable String description, @PathVariable String name, @PathVariable double price){
+        MenuItem m1 = MenuItemFactory.buildMenuItem(description,name,price);
+        if(m1 != null){
+            MenuItem m2 = menuItemService.findByDescriptionAndAndNameAndPrice(m1.getDescription(), m1.getName(), m1.getPrice());
+            if(m2 != null){
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(m2);
+            }
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+    }
 
 }

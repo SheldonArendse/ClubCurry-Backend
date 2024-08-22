@@ -13,4 +13,6 @@ public interface MenuItemRepo extends JpaRepository<MenuItem, Long> {
 
     public List<MenuItem> findAllByIdIsIn(Collection<Long> id);
     public List<MenuItem> findAllByIngredientsIsContaining(Ingredient obj);
+
+    public MenuItem findByDescriptionAndAndNameAndPrice(String description, String name, double price);
 }

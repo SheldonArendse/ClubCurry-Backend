@@ -62,4 +62,9 @@ public class MenuItemService implements IMenuItemService {
     public List<MenuItem> findAllByIngredientsIsContaining(Ingredient obj) {
         return menuItemRepo.findAllByIngredientsIsContaining(obj);
     }
+
+    @Override
+    public MenuItem findByDescriptionAndAndNameAndPrice(String description, String name, double price) {
+        return menuItemRepo.findByDescriptionAndAndNameAndPrice(description,name,price);
+    }
 }

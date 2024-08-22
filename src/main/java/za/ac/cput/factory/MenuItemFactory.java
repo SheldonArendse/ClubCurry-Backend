@@ -69,6 +69,14 @@ public class MenuItemFactory {
         }
         return null;
     }
+    public static MenuItem buildMenuItem(String description, String name, double price) {
+        if (Validation.isValidString(name) && price > 0 && description !=null && !description.isEmpty()) {
+            return new MenuItem.Builder()
+                    .setName(name).setDescription(description)
+                    .setPrice(price).build();
+        }
+        return null;
+    }
     public static MenuItem buildMenuItem(Long id, String name, double price, Menu menu,String description, List<Ingredient> ingredients) {
         if (id > 0 && Validation.isValidString(name) && price > 0 && menu != null&& description !=null && !description.isEmpty()) {
             return new MenuItem.Builder()
