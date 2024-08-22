@@ -3,11 +3,7 @@ package za.ac.cput.service;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import za.ac.cput.domain.Orders;
-import za.ac.cput.domain.Rating;
 import za.ac.cput.domain.enums.RatingStars;
-import za.ac.cput.factory.OrderFactory;
-import za.ac.cput.factory.RatingFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 

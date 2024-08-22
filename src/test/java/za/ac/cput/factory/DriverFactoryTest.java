@@ -1,8 +1,6 @@
 package za.ac.cput.factory;
 
 import org.junit.jupiter.api.Test;
-import za.ac.cput.domain.Driver;
-import za.ac.cput.domain.Vehicle;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
