@@ -45,4 +45,20 @@ public class BookingFactory {
         }
         return null;
     }
+    public static Booking buildBooking(LocalTime time, LocalDate date, int tableNo, Section sectionNo, Status status){
+        if(tableNo>0 && sectionNo !=null && status !=null ){
+            if(LocalDate.now().isBefore(date) || LocalDate.now().isEqual(date)){
+                if(LocalTime.now().isBefore(time)){
+                    return new Booking.Builder()
+                            .setTime(String.valueOf(time))
+                            .setDate(String.valueOf(date))
+                            .setTableNo(tableNo)
+                            .setSectionNo(sectionNo)
+                            .setStatus(status).build();
+                }
+            }
+        }
+        return null;
+    }
+
 }
