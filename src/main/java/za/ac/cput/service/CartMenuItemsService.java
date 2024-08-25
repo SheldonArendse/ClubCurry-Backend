@@ -11,4 +11,20 @@ import java.util.List;
 
 @Service
 public class CartMenuItemsService implements ICartMenuItemsService{
+    private CartMenuItemsRepo cartMenuItemsRepo;
+
+    @Autowired
+    public CartMenuItemsService(CartMenuItemsRepo cartMenuItemsRepo) {
+        this.cartMenuItemsRepo = cartMenuItemsRepo;
+    }
+
+    @Override
+    public CartMenuItems save(CartMenuItems obj) {
+        return cartMenuItemsRepo.save(obj);
+    }
+
+    @Override
+    public CartMenuItems read(Long s) {
+        return cartMenuItemsRepo.findById(s).orElse(null);
+    }
 }
