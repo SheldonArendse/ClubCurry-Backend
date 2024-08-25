@@ -19,4 +19,45 @@ public class GenStaffController {
     public GenStaffController(GenStaffService genStaffService) {
         this.genStaffService = genStaffService;
     }
+
+    @PostMapping("/save")
+    public ResponseEntity<GeneralStaff> save(@RequestBody GeneralStaff obj){
+        GeneralStaff guy = GenStaffFactory.buildGenStaff(obj.getId(),obj.getName(), obj.getSurname(), obj.getUsername(), obj.getPassword());
+        if(guy != null){
+            if(!genStaffService.findByUsername(guy.getUsername())){
+                return ResponseEntity.status(HttpStatus.OK).body(genStaffService.save(guy));
+            }
+        }
+        return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+
+    }
+
+    @GetMapping("/read/{id}")
+    public ResponseEntity<GeneralStaff> read(@PathVariable String id){
+        return ResponseEntity.status(HttpStatus.OK).body(genStaffService.read(id));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<GeneralStaff> update(@RequestBody GeneralStaff obj){
+        GeneralStaff guy = GenStaffFactory.buildGenStaff(obj.getId(),obj.getName(), obj.getSurname(), obj.getUsername(), obj.getPassword());
+        if(guy != null){
+            if(!genStaffService.findByUsername(guy.getUsername())){
+                GeneralStaff guysTwin = genStaffService.update(guy);
+                if(guysTwin != null){
+                    return ResponseEntity.status(HttpStatus.OK).body(guysTwin);
+                }
+            }
+        }
+        return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable String id){
+        return ResponseEntity.status(HttpStatus.OK).body(genStaffService.delete(id));
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<GeneralStaff>> getAll(){
+        return ResponseEntity.status(HttpStatus.OK).body(genStaffService.getAll());
+    }
 }
