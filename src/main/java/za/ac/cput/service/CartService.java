@@ -30,4 +30,26 @@ public class CartService implements ICartService {
     public Cart read(Long s) {
         return cartRepo.findById(s).orElse(null);
     }
+
+    @Override
+    public Cart update(Cart obj) {
+        if(cartRepo.existsById(obj.getId())){
+            return cartRepo.save(obj);
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean delete(Long s) {
+        if(cartRepo.existsById(s)){
+            cartRepo.deleteById(s);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Cart> getAll() {
+        return cartRepo.findAll();
+    }
 }
