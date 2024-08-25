@@ -23,4 +23,39 @@ public class Driver extends Employee{
         this.password = obj.password;
         this.username = obj.username;
     }
+
+    public double getPetrolAllowance() {
+        return petrolAllowance;
+    }
+
+    public Vehicle getRegistration() {
+        return registration;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Driver driver = (Driver) o;
+        return Double.compare(petrolAllowance, driver.petrolAllowance) == 0 && Objects.equals(registration, driver.registration);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), petrolAllowance, registration);
+    }
+
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "petrolAllowance=" + petrolAllowance +
+                ", registration=" + registration +
+                ", id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
