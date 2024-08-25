@@ -36,4 +36,13 @@ public class IngredientMenuItem {
         }
         return null;
     }
+
+    public List<MenuItem> itemsUsingIngredient(Long obj){
+        Ingredient i1 = ingredientService.read(obj);
+        List<MenuItem> menuItemList = menuItemService.findAllByIngredientsIsContaining(i1);
+        if(menuItemList.isEmpty()){
+            return null;
+        }
+        return menuItemList;
+    }
 }
