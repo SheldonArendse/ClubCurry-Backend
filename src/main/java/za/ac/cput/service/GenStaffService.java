@@ -10,10 +10,50 @@ import java.util.List;
 
 @Service
 public class GenStaffService implements IGenStaffService {
+
     private GenStaffRepo genStaffRepo;
 
     @Autowired
     public GenStaffService(GenStaffRepo genStaffRepo) {
         this.genStaffRepo = genStaffRepo;
+    }
+
+
+    @Override
+    public GeneralStaff save(GeneralStaff obj) {
+        return genStaffRepo.save(obj);
+    }
+
+    @Override
+    public GeneralStaff read(String s) {
+        return genStaffRepo.findById(s).orElse(null);
+    }
+
+    @Override
+    public GeneralStaff update(GeneralStaff obj) {
+        if(genStaffRepo.existsById(obj.getId())){
+            return genStaffRepo.save(obj);
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean delete(String s) {
+        if(genStaffRepo.existsById(s)){
+            genStaffRepo.deleteById(s);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<GeneralStaff> getAll() {
+        return genStaffRepo.findAll();
+    }
+
+    @Override
+    public Boolean findByUsername(String username) {
+        GeneralStaff guy = genStaffRepo.findByUsername(username);
+        return guy != null;
     }
 }
