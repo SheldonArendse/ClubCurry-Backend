@@ -28,4 +28,20 @@ public class Review {
         this.note = obj.note;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
 }
