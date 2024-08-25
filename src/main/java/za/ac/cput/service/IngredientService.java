@@ -27,4 +27,25 @@ public class IngredientService implements IIngredientService{
         return ingredientRepo.findById(aLong).orElse(null);
     }
 
+    @Override
+    public Ingredient update(Ingredient obj) {
+        if(ingredientRepo.existsById(obj.getId())){
+            return ingredientRepo.save(obj);
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean delete(Long aLong) {
+        if(ingredientRepo.existsById(aLong)){
+            ingredientRepo.deleteById(aLong);
+            return true;
+        }
+        return null;
+    }
+
+    @Override
+    public List<Ingredient> getAll() {
+        return ingredientRepo.findAll();
+    }
 }
