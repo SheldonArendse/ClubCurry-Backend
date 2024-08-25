@@ -89,4 +89,70 @@ public class Booking {
                 ", bookedBy=" + bookedBy +
                 '}';
     }
+
+    public static class Builder{
+        private long bookingId;
+        private String date;
+
+        private String time;
+
+        private int tableNo;
+
+        private Section sectionNo;
+
+        private Status status;
+
+        @ManyToOne
+        private GeneralStaff bookedBy;
+
+        public Builder setBookingId(long bookingId) {
+            this.bookingId = bookingId;
+            return this;
+        }
+
+        public Builder setDate(String date) {
+            this.date = date;
+            return this;
+        }
+
+        public Builder setTime(String time) {
+            this.time = time;
+            return this;
+        }
+
+        public Builder setTableNo(int tableNo) {
+            this.tableNo = tableNo;
+            return this;
+        }
+
+        public Builder setSectionNo(Section sectionNo) {
+            this.sectionNo = sectionNo;
+            return this;
+        }
+
+        public Builder setStatus(Status status) {
+            this.status = status;
+            return this;
+        }
+
+        public Builder setBookedBy(GeneralStaff bookedBy) {
+            this.bookedBy = bookedBy;
+            return this;
+        }
+
+        public Builder copy(Booking obj){
+            this.bookingId = obj.bookingId;
+            this.date = obj.date;
+            this.time = obj.time;
+            this.tableNo = obj.tableNo;
+            this.sectionNo = obj.sectionNo;
+            this.status = obj.status;
+            this.bookedBy = obj.bookedBy;
+            return this;
+        }
+
+        public Booking build(){
+            return new Booking(this);
+        }
+    }
 }
