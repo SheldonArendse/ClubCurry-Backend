@@ -10,4 +10,22 @@ import java.util.List;
 
 @Service
 public class ReviewService implements IReviewService{
+
+    private ReviewRepo reviewRepo;
+
+
+    @Autowired
+    public ReviewService(ReviewRepo reviewRepo) {
+        this.reviewRepo = reviewRepo;
+    }
+
+    @Override
+    public Review save(Review obj) {
+        return reviewRepo.save(obj);
+    }
+
+    @Override
+    public Review read(Long aLong) {
+        return reviewRepo.findById(aLong).orElse(null);
+    }
 }
