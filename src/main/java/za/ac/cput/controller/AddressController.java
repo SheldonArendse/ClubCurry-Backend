@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/address")
-@CrossOrigin(origins = "*", allowedHeaders = "*") // Allow all origins and headers
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*") // Allow all origins and headers
 public class AddressController {
 
     private AddressService addressService;
