@@ -16,4 +16,27 @@ import java.util.List;
 @RestController
 @RequestMapping("/ingredient")
 public class IngredientController {
+
+    private IngredientService ingredientService;
+    private IngredientMenuItem ingredientMenuItem;
+
+    @Autowired
+    public IngredientController(IngredientService ingredientService, IngredientMenuItem ingredientMenuItem) {
+        this.ingredientService = ingredientService;
+        this.ingredientMenuItem = ingredientMenuItem;
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<Ingredient> save(@RequestBody Ingredient obj){
+        Ingredient i1 = IngredientFactory.buildIngredient(obj.getName());
+        if(i1 == null){
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(ingredientService.save(i1));
+    }
+
+    @GetMapping("/read/{id}")
+    public ResponseEntity<Ingredient> read(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(ingredientService.read(id));
+    }
 }
