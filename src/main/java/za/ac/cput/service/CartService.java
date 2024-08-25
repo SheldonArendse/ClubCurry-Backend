@@ -14,4 +14,20 @@ import java.util.List;
 
 @Service
 public class CartService implements ICartService {
+    private CartRepo cartRepo;
+
+    @Autowired
+    public CartService(CartRepo cartRepo) {
+        this.cartRepo = cartRepo;
+    }
+
+    @Override
+    public Cart save(Cart obj) {
+        return cartRepo.save(obj);
+    }
+
+    @Override
+    public Cart read(Long s) {
+        return cartRepo.findById(s).orElse(null);
+    }
 }
