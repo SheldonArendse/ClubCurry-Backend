@@ -27,5 +27,25 @@ public class AdminService implements IAdminService{
         return adminRepo.findById(s).orElse(null);
     }
 
-  
+    @Override
+    public Admin update(Admin obj) {
+        if(adminRepo.existsById(obj.getId())){
+            return adminRepo.save(obj);
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean delete(String s) {
+        if(adminRepo.existsById(s)){
+            adminRepo.deleteById(s);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Admin> getAll() {
+        return adminRepo.findAll();
+    }
 }
