@@ -28,4 +28,26 @@ public class ReviewService implements IReviewService{
     public Review read(Long aLong) {
         return reviewRepo.findById(aLong).orElse(null);
     }
+
+    @Override
+    public Review update(Review obj) {
+        if(reviewRepo.existsById(obj.getId())){
+            return reviewRepo.save(obj);
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean delete(Long aLong) {
+        if (reviewRepo.existsById(aLong)) {
+            reviewRepo.deleteById(aLong);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Review> getAll() {
+        return reviewRepo.findAll();
+    }
 }
