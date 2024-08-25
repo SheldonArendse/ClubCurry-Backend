@@ -57,4 +57,24 @@ public class Ingredient {
 
         private String name;
 
+        public Builder setId(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder copy(Ingredient obj){
+            this.id = obj.id;
+            this.name = obj.name;
+            return this;
+        }
+
+        public Ingredient build(){
+            return new Ingredient(this);
+        }
+    }
     }
