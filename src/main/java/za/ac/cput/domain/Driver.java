@@ -68,4 +68,54 @@ public class Driver extends Employee{
         protected String id;
 
         protected String name, surname, username, password;
+
+        public Builder setPetrolAllowance(double petrolAllowance) {
+            this.petrolAllowance = petrolAllowance;
+            return this;
+        }
+
+        public Builder setRegistration(Vehicle registration) {
+            this.registration = registration;
+            return this;
+        }
+
+        public Builder setId(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setSurname(String surname) {
+            this.surname = surname;
+            return this;
+        }
+
+        public Builder setUsername(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public Builder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder copy(Driver obj){
+            this.petrolAllowance = obj.petrolAllowance;
+            this.registration = obj.registration;
+            this.id = obj.id;
+            this.name = obj.name;
+            this.surname = obj.surname;
+            this.password = obj.password;
+            this.username = obj.username;
+            return this;
+        }
+        public Driver build(){
+            return new Driver(this);
+        }
+    }
 }
