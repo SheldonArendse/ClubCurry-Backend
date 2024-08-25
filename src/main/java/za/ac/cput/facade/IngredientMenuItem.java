@@ -14,4 +14,14 @@ import java.util.Optional;
 
 @Component
 public class IngredientMenuItem {
+
+    private IngredientService ingredientService;
+    private MenuItemService menuItemService;
+
+    @Autowired
+    public IngredientMenuItem(IngredientService ingredientService, MenuItemService menuItemService) {
+        this.ingredientService = ingredientService;
+        this.menuItemService = menuItemService;
+    }
+
 }
