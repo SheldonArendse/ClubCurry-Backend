@@ -60,5 +60,35 @@ public class Cart {
                 '}';
     }
 
-    
+    public static class Builder{
+        private long id;
+        private Customer customer;
+        private List<CartMenuItems> items;
+
+        public Builder setId(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setCustomer(Customer customer) {
+            this.customer = customer;
+            return this;
+        }
+
+        public Builder setItems(List<CartMenuItems> items) {
+            this.items = items;
+            return this;
+        }
+
+        public Builder copy(Cart obj){
+            this.id = obj.id;
+            this.customer = obj.customer;
+            this.items = obj.items;
+            return this;
+        }
+
+        public Cart build(){
+            return new Cart(this);
+        }
+    }
 }
