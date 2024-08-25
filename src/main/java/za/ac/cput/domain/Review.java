@@ -67,4 +67,46 @@ public class Review {
                 '}';
     }
 
+    public static class Builder{
+        private long id;
+
+        private Rating rating;
+
+        private Customer customer;
+
+        private String note;
+
+        public Builder setId(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setRating(Rating rating) {
+            this.rating = rating;
+            return this;
+        }
+
+        public Builder setCustomer(Customer customer) {
+            this.customer = customer;
+            return this;
+        }
+
+        public Builder setNote(String note) {
+            this.note = note;
+            return this;
+        }
+
+        public Builder copy(Review obj){
+            this.id = obj.id;
+            this.rating = obj.rating;
+            this.customer = obj.customer;
+            this.note = obj.note;
+            return this;
+        }
+
+        public Review build(){
+            return new Review(this);
+        }
+    }
+
 }
