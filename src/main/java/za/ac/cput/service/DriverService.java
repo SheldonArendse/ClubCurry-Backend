@@ -36,4 +36,18 @@ public class DriverService implements IDriverService{
         }
         return null;
     }
+
+    @Override
+    public Boolean delete(String s) {
+        if(driverRepo.existsById(s)){
+            driverRepo.deleteById(s);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Driver> getAll() {
+        return driverRepo.findAll();
+    }
 }
