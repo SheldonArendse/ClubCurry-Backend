@@ -27,4 +27,26 @@ public class CartMenuItemsService implements ICartMenuItemsService{
     public CartMenuItems read(Long s) {
         return cartMenuItemsRepo.findById(s).orElse(null);
     }
+
+    @Override
+    public CartMenuItems update(CartMenuItems obj) {
+        if(cartMenuItemsRepo.existsById(obj.getId())){
+            return cartMenuItemsRepo.save(obj);
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean delete(Long s) {
+        if(cartMenuItemsRepo.existsById(s)){
+            cartMenuItemsRepo.deleteById(s);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<CartMenuItems> getAll() {
+        return cartMenuItemsRepo.findAll();
+    }
 }
