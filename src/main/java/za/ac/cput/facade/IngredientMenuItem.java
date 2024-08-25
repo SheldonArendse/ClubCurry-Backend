@@ -24,4 +24,16 @@ public class IngredientMenuItem {
         this.menuItemService = menuItemService;
     }
 
+    public MenuItem validIngredients(MenuItem obj){
+        List<Ingredient> invalidIngredients = new ArrayList<>();
+        for(Ingredient ingredient : obj.getIngredients()){
+            if(ingredientService.read(ingredient.getId()) == null){
+                invalidIngredients.add(ingredient);
+            }
+        }
+        if(invalidIngredients.isEmpty()){
+            return menuItemService.save(obj);
+        }
+        return null;
+    }
 }
