@@ -84,4 +84,61 @@ public class Delivery {
                 ", address=" + address +
                 '}';
     }
+
+    public static class Builder{
+        private long id;
+
+        private boolean delivered;
+
+        private Date completed;
+
+        private Driver driver;
+
+        private Orders order;
+        private Address address;
+
+        public Builder setAddress(Address address) {
+            this.address = address;
+            return this;
+        }
+
+        public Builder setId(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setDelivered(boolean delivered) {
+            this.delivered = delivered;
+            return this;
+        }
+
+        public Builder setCompleted(Date completed) {
+            this.completed = completed;
+            return this;
+        }
+
+        public Builder setDriver(Driver driver) {
+            this.driver = driver;
+            return this;
+        }
+
+        public Builder setOrder(Orders order) {
+            this.order = order;
+            return this;
+        }
+
+        public Builder copy(Delivery obj){
+            this.id = obj.id;
+            this.delivered = obj.delivered;
+            this.completed = obj.completed;
+            this.driver = obj.driver;
+            this.order = obj.order;
+            this.address = obj.address;
+            return this;
+        }
+
+        public Delivery build(){
+            return new Delivery(this);
+        }
+    }
 }
