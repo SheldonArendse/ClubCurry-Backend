@@ -1,4 +1,7 @@
 package za.ac.cput.service.interfaces;
 
-public interface IAddressService {
+import za.ac.cput.domain.Address;
+import za.ac.cput.domain.Customer;
+
+public interface IAddressService extends IService<Address, Long> {
 }
