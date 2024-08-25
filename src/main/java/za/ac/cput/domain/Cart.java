@@ -7,4 +7,58 @@ import java.util.Objects;
 
 @Entity
 public class Cart {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @OneToOne
+    @JoinColumn(name = "customer_email")
+    private Customer customer;
+
+    @OneToMany
+    private List<CartMenuItems> items;
+
+    protected Cart(){}
+
+    public Cart(Builder obj) {
+        this.id = obj.id;
+        this.customer = obj.customer;
+        this.items = obj.items;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public List<CartMenuItems> getItems() {
+        return items;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cart cart = (Cart) o;
+        return id == cart.id && Objects.equals(customer, cart.customer) && Objects.equals(items, cart.items);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, customer, items);
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", items=" + items +
+                '}';
+    }
+
+    
 }
