@@ -51,4 +51,10 @@ public class Ingredient {
                 ", name='" + name + '\'' +
                 '}';
     }
-}
+
+    public static class Builder{
+        private long id;
+
+        private String name;
+
+    }
