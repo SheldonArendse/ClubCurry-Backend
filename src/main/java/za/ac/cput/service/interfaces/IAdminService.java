@@ -1,4 +1,5 @@
 package za.ac.cput.service.interfaces;
 
-public interface IAdminService {
+import za.ac.cput.domain.Admin;
+public interface IAdminService extends IService<Admin, String>{
 }
