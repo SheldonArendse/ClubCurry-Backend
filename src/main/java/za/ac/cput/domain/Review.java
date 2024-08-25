@@ -44,4 +44,27 @@ public class Review {
         return note;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Review review = (Review) o;
+        return id == review.id && Objects.equals(rating, review.rating) && Objects.equals(customer, review.customer) && Objects.equals(note, review.note);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, rating, customer, note);
+    }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", rating=" + rating +
+                ", customer=" + customer +
+                ", note='" + note + '\'' +
+                '}';
+    }
+
 }
