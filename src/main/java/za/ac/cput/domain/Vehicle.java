@@ -14,8 +14,7 @@ public class Vehicle {
 
     private String model, color, make;
 
-    protected Vehicle() {
-    }
+    protected Vehicle(){}
 
     public Vehicle(Builder obj) {
         this.id = obj.id;
@@ -61,5 +60,43 @@ public class Vehicle {
                 ", color='" + color + '\'' +
                 ", make='" + make + '\'' +
                 '}';
+    }
+
+    public static class Builder{
+        private long id;
+
+        private String model, color, make;
+
+        public Builder setId(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setModel(String model) {
+            this.model = model;
+            return this;
+        }
+
+        public Builder setColor(String color) {
+            this.color = color;
+            return this;
+        }
+
+        public Builder setMake(String make) {
+            this.make = make;
+            return this;
+        }
+
+        public Builder copy(Vehicle obj){
+            this.id = obj.id;
+            this.model = obj.model;
+            this.color = obj.color;
+            this.make = obj.make;
+            return this;
+        }
+
+        public Vehicle build(){
+            return new Vehicle(this);
+        }
     }
 }
