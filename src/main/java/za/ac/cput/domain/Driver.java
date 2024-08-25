@@ -58,4 +58,14 @@ public class Driver extends Employee{
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    public static class Builder{
+        private double petrolAllowance;
+
+        @OneToOne(cascade = CascadeType.ALL)
+        private Vehicle registration;
+
+        protected String id;
+
+        protected String name, surname, username, password;
 }
