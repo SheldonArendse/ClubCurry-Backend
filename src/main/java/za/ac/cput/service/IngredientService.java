@@ -10,4 +10,21 @@ import java.util.List;
 
 @Service
 public class IngredientService implements IIngredientService{
+
+    private IngredientRepo ingredientRepo;
+
+    public IngredientService(IngredientRepo ingredientRepo) {
+        this.ingredientRepo = ingredientRepo;
+    }
+
+    @Override
+    public Ingredient save(Ingredient obj) {
+        return ingredientRepo.save(obj);
+    }
+
+    @Override
+    public Ingredient read(Long aLong) {
+        return ingredientRepo.findById(aLong).orElse(null);
+    }
+
 }
