@@ -77,5 +77,50 @@ public class CartMenuItems {
                 '}';
     }
 
-    
+    public static class Builder{
+        private Long id;
+        private MenuItem menuItem;
+
+        private int quantity;
+
+        private String note;
+
+        private SpiceLevel spiceLevel;
+
+        public Builder setId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setMenuItem(MenuItem menuItem) {
+            this.menuItem = menuItem;
+            return this;
+        }
+
+        public Builder setQuantity(int quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public Builder setNote(String note) {
+            this.note = note;
+            return this;
+        }
+
+        public Builder setSpiceLevel(SpiceLevel spiceLevel) {
+            this.spiceLevel = spiceLevel;
+            return this;
+        }
+        public Builder copy(CartMenuItems obj){
+            this.id = obj.id;
+            this.menuItem = obj.menuItem;
+            this.quantity = obj.quantity;
+            this.note = obj.note;
+            this.spiceLevel = obj.spiceLevel;
+            return this;
+        }
+        public CartMenuItems build(){
+            return new CartMenuItems(this);
+        }
+    }
 }
