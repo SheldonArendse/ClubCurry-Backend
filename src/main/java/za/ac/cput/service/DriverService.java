@@ -12,5 +12,28 @@ import java.util.List;
 
 @Service
 public class DriverService implements IDriverService{
-    
+    private DriverRepo driverRepo;
+
+    @Autowired
+    public DriverService(DriverRepo driverRepo) {
+        this.driverRepo = driverRepo;
+    }
+
+    @Override
+    public Driver save(Driver obj) {
+        return driverRepo.save(obj);
+    }
+
+    @Override
+    public Driver read(String s) {
+        return driverRepo.findById(s).orElse(null);
+    }
+
+    @Override
+    public Driver update(Driver obj) {
+        if(driverRepo.existsById(obj.getId())){
+            return driverRepo.save(obj);
+        }
+        return null;
+    }
 }
