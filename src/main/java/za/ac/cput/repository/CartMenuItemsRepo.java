@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.CartMenuItems;
 
 @Repository
-public interface CartMenuItemsRepo  extends JpaRepository<CartMenuItems,Long> {
+public interface CartMenuItemsRepo extends JpaRepository<CartMenuItems,Long>{
 }

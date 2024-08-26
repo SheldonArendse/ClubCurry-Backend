@@ -6,4 +6,6 @@ import za.ac.cput.domain.Admin;
 
 @Repository
 public interface AdminRepo extends JpaRepository<Admin, String> {
+
+    public Admin findAdminByUsername(String username);
 }

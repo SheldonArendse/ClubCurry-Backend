@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
-import za.ac.cput.domain.Orders;
-import za.ac.cput.domain.Rating;
 import za.ac.cput.domain.enums.RatingStars;
 
 import static org.junit.jupiter.api.Assertions.*;
