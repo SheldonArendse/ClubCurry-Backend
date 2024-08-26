@@ -50,7 +50,7 @@ public class AdminService implements IAdminService{
     }
 
     @Override
-    public Admin findAdminByUsername(String username) {
-        return adminRepo.findAdminByUsername(username);
+    public Boolean findAdminByUsername(String username) {
+        return adminRepo.findAdminByUsername(username) != null;
     }
 }

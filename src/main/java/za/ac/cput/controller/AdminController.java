@@ -24,7 +24,7 @@ public class AdminController {
     public ResponseEntity<Admin> save(@RequestBody Admin obj){
         Admin boss = AdminFactory.buildAdmin(obj.getId(),obj.getName(),obj.getSurname(),obj.getUsername(),obj.getPassword());
         if(boss != null){
-            if(!adminService.findByUsername(boss.getUsername())){
+            if(!adminService.findAdminByUsername(boss.getUsername())){
                 return ResponseEntity.status(HttpStatus.OK).body(adminService.save(boss));
             }
         }
@@ -40,7 +40,7 @@ public class AdminController {
     public ResponseEntity<Admin> update(@RequestBody Admin obj){
         Admin boss = AdminFactory.buildAdmin(obj.getId(),obj.getName(),obj.getSurname(),obj.getUsername(),obj.getPassword());
         if(boss != null){
-            if(!adminService.findByUsername(boss.getUsername())){
+            if(!adminService.findAdminByUsername(boss.getUsername())){
                 Admin bossMan = adminService.update(boss);
                 if(bossMan != null){
                     return ResponseEntity.status(HttpStatus.OK).body(bossMan);
