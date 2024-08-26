@@ -1,7 +1,6 @@
 package za.ac.cput.factory;
 
 import org.junit.jupiter.api.*;
-import za.ac.cput.domain.GeneralStaff;
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

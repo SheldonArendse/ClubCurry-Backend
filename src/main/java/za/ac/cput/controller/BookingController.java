@@ -30,7 +30,7 @@ public class BookingController {
     public ResponseEntity<Booking> save(@RequestBody Booking obj){
         Booking booking = BookingFactory.buildBooking(Time.valueOf(obj.getTime()).toLocalTime(), Date.valueOf(obj.getDate()).toLocalDate(),obj.getTableNo(),obj.getSectionNo(),obj.getStatus());
         if(booking !=null){
-                return ResponseEntity.status(HttpStatus.OK).body(bookingService.save(booking));
+            return ResponseEntity.status(HttpStatus.OK).body(bookingService.save(booking));
         }
         return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
     }

@@ -9,7 +9,7 @@ import za.ac.cput.service.interfaces.IService;
 import java.util.List;
 
 @Service
-public class IngredientService implements IIngredientService {
+public class IngredientService implements IIngredientService{
 
     private IngredientRepo ingredientRepo;
 

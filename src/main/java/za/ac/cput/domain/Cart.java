@@ -7,7 +7,6 @@ import java.util.Objects;
 
 @Entity
 public class Cart {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

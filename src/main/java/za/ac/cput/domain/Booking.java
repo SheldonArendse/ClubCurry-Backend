@@ -10,18 +10,13 @@ import java.util.Objects;
 
 @Entity
 public class Booking {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long bookingId;
     private String date;
-
     private String time;
-
     private int tableNo;
-
     private Section sectionNo;
-
     private Status status;
 
     @ManyToOne

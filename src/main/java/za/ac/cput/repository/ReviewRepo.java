@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Review;
 
 @Repository
-public interface ReviewRepo extends JpaRepository<Review, Long> {
+public interface ReviewRepo extends JpaRepository<Review, Long>{
 }

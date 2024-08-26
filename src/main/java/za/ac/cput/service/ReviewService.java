@@ -9,7 +9,7 @@ import za.ac.cput.service.interfaces.IReviewService;
 import java.util.List;
 
 @Service
-public class ReviewService implements IReviewService {
+public class ReviewService implements IReviewService{
 
     private ReviewRepo reviewRepo;
 
