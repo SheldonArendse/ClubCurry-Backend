@@ -1,10 +1,6 @@
 package za.ac.cput.factory;
 
 import org.junit.jupiter.api.Test;
-import za.ac.cput.domain.Address;
-import za.ac.cput.domain.Delivery;
-import za.ac.cput.domain.Driver;
-import za.ac.cput.domain.Orders;
 
 import java.sql.Date;
 

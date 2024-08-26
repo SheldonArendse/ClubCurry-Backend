@@ -7,3 +7,4 @@ import za.ac.cput.domain.Rating;
 @Repository
 public interface RatingRepo extends JpaRepository<Rating, Long> {
 }
+

@@ -2,7 +2,6 @@ package za.ac.cput.factory;
 
 import za.ac.cput.domain.Ingredient;
 import za.ac.cput.utils.Validation;
-
 public class IngredientFactory {
 
     public static Ingredient buildIngredient(String name){
@@ -18,5 +17,4 @@ public class IngredientFactory {
         }
         return null;
     }
-
 }

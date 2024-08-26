@@ -1,14 +1,7 @@
 package za.ac.cput.service;
 
 import org.junit.jupiter.api.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import za.ac.cput.domain.Image;
-import za.ac.cput.domain.MenuItem;
-import za.ac.cput.domain.Vehicle;
-import za.ac.cput.factory.ImageFactory;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.MethodName.class)
