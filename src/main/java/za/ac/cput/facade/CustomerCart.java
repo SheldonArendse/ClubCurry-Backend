@@ -17,4 +17,11 @@ public class CustomerCart {
         this.cartService = cartService;
         this.customerService = customerService;
     }
+
+    public Cart canSave(Cart obj){
+        if(customerService.read(obj.getCustomer().getEmail()) == null){
+            return null;
+        }
+        return obj;
+    }
 }
