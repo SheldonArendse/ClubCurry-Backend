@@ -10,7 +10,8 @@ import za.ac.cput.service.interfaces.ICartMenuItemsService;
 import java.util.List;
 
 @Service
-public class CartMenuItemsService implements ICartMenuItemsService{
+public class CartMenuItemsService implements ICartMenuItemsService {
+
     private CartMenuItemsRepo cartMenuItemsRepo;
 
     @Autowired

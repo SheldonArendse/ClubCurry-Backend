@@ -108,5 +108,4 @@ public class Review {
             return new Review(this);
         }
     }
-
 }

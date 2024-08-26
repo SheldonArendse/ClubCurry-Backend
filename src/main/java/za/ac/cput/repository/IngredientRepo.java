@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.domain.Ingredient;
 
 @Repository
-public interface IngredientRepo extends JpaRepository<Ingredient, Long>{
+public interface IngredientRepo extends JpaRepository<Ingredient, Long> {
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Menu;
 import za.ac.cput.repository.MenuRepo;
 import za.ac.cput.service.interfaces.IMenuService;
+import za.ac.cput.service.interfaces.IService;
 
 import java.util.List;
 

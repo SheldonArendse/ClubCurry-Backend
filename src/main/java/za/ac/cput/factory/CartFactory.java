@@ -7,6 +7,7 @@ import za.ac.cput.domain.CartMenuItems;
 import java.util.List;
 
 public class CartFactory {
+
     public static Cart buildCart(Customer customer, List<CartMenuItems> menuItems){
         if(customer != null && !menuItems.isEmpty()){
             return new Cart.Builder().setCustomer(customer).setItems(menuItems).build();

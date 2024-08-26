@@ -9,7 +9,6 @@ import java.util.Objects;
 
 @Entity
 public class CartMenuItems {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

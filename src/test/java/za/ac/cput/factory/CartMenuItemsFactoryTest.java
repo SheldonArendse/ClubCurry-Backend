@@ -1,6 +1,7 @@
 package za.ac.cput.factory;
 
 import org.junit.jupiter.api.Test;
+import za.ac.cput.domain.CartMenuItems;
 import za.ac.cput.domain.MenuItem;
 import za.ac.cput.domain.enums.SpiceLevel;
 

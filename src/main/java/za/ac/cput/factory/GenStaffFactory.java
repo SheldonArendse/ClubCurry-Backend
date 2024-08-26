@@ -5,6 +5,7 @@ import za.ac.cput.domain.enums.ExpertLevel;
 import za.ac.cput.utils.Validation;
 
 public class GenStaffFactory {
+
     public static GeneralStaff buildGenStaff(String id, String name, String surname, String username, String password) {
         try {
             long i = Long.parseLong(id);
@@ -27,4 +28,5 @@ public class GenStaffFactory {
         }
         return null;
     }
+
 }

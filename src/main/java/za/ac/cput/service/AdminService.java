@@ -9,7 +9,8 @@ import za.ac.cput.service.interfaces.IAdminService;
 import java.util.List;
 
 @Service
-public class AdminService implements IAdminService{
+public class AdminService implements IAdminService {
+
     private AdminRepo adminRepo;
 
     @Autowired
@@ -47,10 +48,5 @@ public class AdminService implements IAdminService{
     @Override
     public List<Admin> getAll() {
         return adminRepo.findAll();
-    }
-
-    @Override
-    public Boolean findAdminByUsername(String username) {
-        return adminRepo.findAdminByUsername(username) != null;
     }
 }

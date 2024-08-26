@@ -11,7 +11,8 @@ import za.ac.cput.service.interfaces.IService;
 import java.util.List;
 
 @Service
-public class DriverService implements IDriverService{
+public class DriverService implements IDriverService {
+
     private DriverRepo driverRepo;
 
     @Autowired

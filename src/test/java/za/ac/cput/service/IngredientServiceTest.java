@@ -7,6 +7,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Ingredient;
+import za.ac.cput.domain.Vehicle;
 import za.ac.cput.factory.IngredientFactory;
 
 import static org.junit.jupiter.api.Assertions.*;

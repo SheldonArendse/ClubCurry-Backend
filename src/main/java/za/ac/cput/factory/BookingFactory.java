@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class BookingFactory {
+
     public static Booking buildBooking(Long id,LocalTime time, LocalDate date, int tableNo, Section sectionNo, Status status, GeneralStaff bookedBy){
         if(id>0 &&tableNo>0 && sectionNo !=null && status !=null && bookedBy !=null){
             if(LocalDate.now().isBefore(date) || LocalDate.now().isEqual(date)){
@@ -28,7 +29,6 @@ public class BookingFactory {
         }
         return null;
     }
-
     public static Booking buildBooking(LocalTime time, LocalDate date, int tableNo, Section sectionNo, Status status, GeneralStaff bookedBy){
         if(tableNo>0 && sectionNo !=null && status !=null && bookedBy !=null){
             if(LocalDate.now().isBefore(date) || LocalDate.now().isEqual(date)){

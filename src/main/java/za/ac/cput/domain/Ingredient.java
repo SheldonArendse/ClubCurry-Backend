@@ -57,6 +57,7 @@ public class Ingredient {
 
         private String name;
 
+
         public Builder setId(long id) {
             this.id = id;
             return this;
@@ -77,4 +78,4 @@ public class Ingredient {
             return new Ingredient(this);
         }
     }
-    }
+}
