@@ -41,7 +41,7 @@ public class AdminController {
         Admin boss = AdminFactory.buildAdmin(obj.getId(),obj.getName(),obj.getSurname(),obj.getUsername(),obj.getPassword());
         if(boss != null){
             if(!adminService.findByUsername(boss.getUsername())){
-                Admin bossMan = adminService.update(guy);
+                Admin bossMan = adminService.update(boss);
                 if(bossMan != null){
                     return ResponseEntity.status(HttpStatus.OK).body(bossMan);
                 }

@@ -48,4 +48,9 @@ public class AdminService implements IAdminService{
     public List<Admin> getAll() {
         return adminRepo.findAll();
     }
+
+    @Override
+    public Admin findAdminByUsername(String username) {
+        return adminRepo.findAdminByUsername(username);
+    }
 }
