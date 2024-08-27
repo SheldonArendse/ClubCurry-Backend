@@ -20,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/image")
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*") // Allow all origins and headers
 public class ImageController {
 
     private ImageService imageService;

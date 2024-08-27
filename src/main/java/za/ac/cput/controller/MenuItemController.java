@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/menuItem")
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*") // Allow all origins and headers
 public class MenuItemController {
 
     private MenuItemService menuItemService;

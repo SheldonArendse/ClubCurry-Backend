@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*") // Allow all origins and headers
 public class AdminController {
     private AdminService adminService;
 

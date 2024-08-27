@@ -1,6 +1,8 @@
 package za.ac.cput.factory;
 
 import org.junit.jupiter.api.Test;
+import za.ac.cput.domain.Booking;
+import za.ac.cput.domain.GeneralStaff;
 import za.ac.cput.domain.enums.Section;
 import za.ac.cput.domain.enums.Status;
 
