@@ -93,4 +93,14 @@ public class ImageController {
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
         }
     }
+
+    @DeleteMapping("/deleteByItemId/{itemId}")
+    public boolean deleteByItemId(@PathVariable Long itemId){
+        MenuItem id = MenuItemFactory.buildMenuItem(itemId);
+        Image obj = imageService.findImageByItemId(id);
+
+        imageService.delete(obj.getId());
+
+        return imageService.read(obj.getId()) == null;
+    }
 }
