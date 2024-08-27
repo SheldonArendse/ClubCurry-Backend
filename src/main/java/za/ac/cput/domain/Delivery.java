@@ -1,8 +1,10 @@
 package za.ac.cput.domain;
 
 import jakarta.persistence.*;
+import za.ac.cput.domain.enums.DeliveryStatus;
 
 import java.sql.Date;
+import java.time.LocalTime;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +17,12 @@ public class Delivery {
     private boolean delivered;
 
     private Date completed;
+
+    public LocalTime timeOfDelivery;
+
+    private LocalTime estimatedDeliveryTime;
+
+    private DeliveryStatus status;
 
     @ManyToOne
     private Driver driver;
@@ -34,6 +42,9 @@ public class Delivery {
         this.driver = obj.driver;
         this.order = obj.order;
         this.address = obj.address;
+        this.estimatedDeliveryTime = obj.estimatedDeliveryTime;
+        this.status = obj.status;
+        this.timeOfDelivery = obj.timeOfDelivery;
     }
 
     public Address getAddress() {
@@ -85,6 +96,10 @@ public class Delivery {
                 '}';
     }
 
+    public LocalTime getEstimatedDeliveryTime() {
+        return estimatedDeliveryTime;
+    }
+
     public static class Builder{
         private long id;
 
@@ -94,8 +109,25 @@ public class Delivery {
 
         private Driver driver;
 
+        private DeliveryStatus status;
+
+        private LocalTime timeOfDelivery;
+
         private Orders order;
+
         private Address address;
+        
+        private LocalTime estimatedDeliveryTime;
+
+        public Builder setTimeOfDelivery(LocalTime timeOfDelivery) {
+            this.timeOfDelivery = timeOfDelivery;
+            return this;
+        }
+
+        public Builder setStatus(DeliveryStatus status) {
+            this.status = status;
+            return this;
+        }
 
         public Builder setAddress(Address address) {
             this.address = address;
@@ -127,6 +159,11 @@ public class Delivery {
             return this;
         }
 
+        public Builder setEstimatedDeliveryTime(LocalTime estimatedDeliveryTime) {
+            this.estimatedDeliveryTime = estimatedDeliveryTime;
+            return this;
+        }
+
         public Builder copy(Delivery obj){
             this.id = obj.id;
             this.delivered = obj.delivered;
@@ -134,6 +171,9 @@ public class Delivery {
             this.driver = obj.driver;
             this.order = obj.order;
             this.address = obj.address;
+            this.estimatedDeliveryTime= obj.estimatedDeliveryTime;
+            this.status = obj.status;
+            this.timeOfDelivery = obj.timeOfDelivery;
             return this;
         }
 
