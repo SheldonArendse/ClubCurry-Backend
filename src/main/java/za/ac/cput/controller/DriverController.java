@@ -16,6 +16,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
 public class DriverController {
 
+    private DriverService driverService;
+
     @Autowired
     public DriverController(DriverService driverService){
         this.driverService = driverService;
