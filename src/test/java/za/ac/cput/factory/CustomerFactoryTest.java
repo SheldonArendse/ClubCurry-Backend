@@ -1,6 +1,8 @@
 package za.ac.cput.factory;
 
 import org.junit.jupiter.api.Test;
+import za.ac.cput.domain.Address;
+import za.ac.cput.domain.Customer;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/booking")
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*") // Allow all origins and headers
 public class BookingController {
 
     private BookingService bookingService;
