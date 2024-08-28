@@ -16,9 +16,21 @@ public class Rating {
 
     private RatingStars foodQuality;
 
+    private RatingStars serviceQuality;
+
+    private RatingStars atmosphereQuality;
+
     private RatingStars deliveryQuality;
 
     protected Rating(){}
+
+    public RatingStars getServiceQuality() {
+        return serviceQuality;
+    }
+
+    public RatingStars getAtmosphereQuality() {
+        return atmosphereQuality;
+    }
 
     public Rating(Builder obj) {
         this.id = obj.id;
@@ -73,6 +85,20 @@ public class Rating {
 
         private RatingStars foodQuality;
 
+        public Builder setServiceQuality(RatingStars serviceQuality) {
+            this.serviceQuality = serviceQuality;
+            return this;
+        }
+
+        public Builder setAtmosphereQuality(RatingStars atmosphereQuality) {
+            this.atmosphereQuality = atmosphereQuality;
+            return this;
+        }
+
+        private RatingStars serviceQuality;
+
+        private RatingStars atmosphereQuality;
+
         private RatingStars deliveryQuality;
 
         public Builder setId(long id) {
@@ -100,6 +126,8 @@ public class Rating {
             this.order = obj.order;
             this.foodQuality = obj.foodQuality;
             this.deliveryQuality = obj.deliveryQuality;
+            this.atmosphereQuality = obj.atmosphereQuality;
+            this.serviceQuality = obj.serviceQuality;
             return this;
         }
 

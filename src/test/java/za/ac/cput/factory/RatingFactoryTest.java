@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
+import za.ac.cput.domain.Orders;
+import za.ac.cput.domain.Rating;
 import za.ac.cput.domain.enums.RatingStars;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,7 +26,7 @@ class RatingFactoryTest {
         RatingStars foodQuality = RatingStars.FIVE;
         RatingStars deliveryQuality = RatingStars.FIVE;
 
-        Rating rating = RatingFactory.buildRating(order, foodQuality, deliveryQuality);
+        Rating rating = RatingFactory.buildRating(order, RatingStars.TWO, RatingStars.FOUR,RatingStars.THREE, RatingStars.THREE);
         assertNotNull(rating);
         System.out.println(rating);
     }
@@ -39,7 +41,7 @@ class RatingFactoryTest {
         RatingStars foodQuality = null;
         RatingStars deliveryQuality = RatingStars.FIVE;
 
-        Rating rating = RatingFactory.buildRating(order, foodQuality, deliveryQuality);
+        Rating rating = RatingFactory.buildRating(order, RatingStars.TWO, RatingStars.FOUR,RatingStars.THREE, RatingStars.THREE);
         assertNotNull(rating);
         System.out.println(rating);
     }
@@ -54,7 +56,7 @@ class RatingFactoryTest {
         RatingStars foodQuality = RatingStars.FIVE;
         RatingStars deliveryQuality = RatingStars.FOUR;
 
-        Rating rating = RatingFactory.buildRating(894874534L, order, foodQuality, deliveryQuality);
+        Rating rating = RatingFactory.buildRating(order, RatingStars.TWO, RatingStars.FOUR,RatingStars.THREE, RatingStars.THREE);
         assertNotNull(rating);
         System.out.println(rating);
     }
@@ -69,7 +71,7 @@ class RatingFactoryTest {
         RatingStars foodQuality = RatingStars.FIVE;
         RatingStars deliveryQuality = RatingStars.FIVE;
 
-        Rating rating = RatingFactory.buildRating(-894874534L, order, foodQuality, deliveryQuality);
+        Rating rating = RatingFactory.buildRating(order, RatingStars.TWO, RatingStars.FOUR,RatingStars.THREE, RatingStars.THREE);
         assertNotNull(rating);
         System.out.println(rating);
     }

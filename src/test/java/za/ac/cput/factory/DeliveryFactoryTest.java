@@ -1,8 +1,15 @@
 package za.ac.cput.factory;
 
 import org.junit.jupiter.api.Test;
+import za.ac.cput.domain.Address;
+import za.ac.cput.domain.Delivery;
+import za.ac.cput.domain.Driver;
+import za.ac.cput.domain.Orders;
+import za.ac.cput.domain.enums.DeliveryStatus;
 
 import java.sql.Date;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -16,7 +23,7 @@ class DeliveryFactoryTest {
         Orders order = mock(Orders.class);
         Address address = mock(Address.class);
 
-        Delivery delivery = DeliveryFactory.buildDelivery(delivered, completed, driver, order, address);
+        Delivery delivery = DeliveryFactory.buildDelivery(delivered,completed,driver,order, address,LocalTime.now(), DeliveryStatus.PENDING,LocalTime.now().minusHours(1L));
 
         assertNotNull(delivery);
         assertEquals(delivered, delivery.isDelivered());
@@ -34,7 +41,7 @@ class DeliveryFactoryTest {
         Orders order = null;
         Address address = null;
 
-        Delivery delivery = DeliveryFactory.buildDelivery(delivered, completed, driver, order, address);
+        Delivery delivery = DeliveryFactory.buildDelivery(delivered,completed,driver,order, address,LocalTime.now(), DeliveryStatus.PENDING,LocalTime.now().minusHours(1L));
 
         assertNull(delivery);
     }

@@ -1,6 +1,9 @@
 package za.ac.cput.factory;
 
 import org.junit.jupiter.api.Test;
+import za.ac.cput.domain.Cart;
+import za.ac.cput.domain.CartMenuItems;
+import za.ac.cput.domain.Customer;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -20,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/image")
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*") // Allow all origins and headers
 public class ImageController {
 
     private ImageService imageService;
@@ -91,5 +92,15 @@ public class ImageController {
             System.out.println("Error: " + e.getLocalizedMessage());
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
         }
+    }
+
+    @DeleteMapping("/deleteByItemId/{itemId}")
+    public boolean deleteByItemId(@PathVariable Long itemId){
+        MenuItem id = MenuItemFactory.buildMenuItem(itemId);
+        Image obj = imageService.findImageByItemId(id);
+
+        imageService.delete(obj.getId());
+
+        return imageService.read(obj.getId()) == null;
     }
 }

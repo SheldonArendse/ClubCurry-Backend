@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/menuItem")
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*") // Allow all origins and headers
 public class MenuItemController {
 
     private MenuItemService menuItemService;
@@ -58,7 +59,7 @@ public class MenuItemController {
 
     @PutMapping("/update")
     public ResponseEntity<MenuItem> update(@RequestBody MenuItem obj){
-        MenuItem builtObj = MenuItemFactory.buildMenuItem(obj.getId(), obj.getName(), obj.getPrice(), obj.getMenuId());
+        MenuItem builtObj = MenuItemFactory.buildMenuItem(obj.getId(),obj.getDescription(), obj.getName(), obj.getPrice(), obj.getMenuId());
 
         if(builtObj == null){
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
