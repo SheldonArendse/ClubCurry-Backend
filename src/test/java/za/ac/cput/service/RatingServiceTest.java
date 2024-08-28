@@ -27,7 +27,7 @@ class RatingServiceTest {
         order = new Orders.Builder().setId(100L).build();
         RatingStars foodQuality = RatingStars.FIVE;
         RatingStars deliveryQuality = RatingStars.FIVE;
-        rating = RatingFactory.buildRating(48L, order, foodQuality, deliveryQuality);
+        Rating rating = RatingFactory.buildRating(order, RatingStars.TWO, RatingStars.FOUR,RatingStars.THREE, RatingStars.THREE);
 
     }
 

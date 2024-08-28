@@ -25,10 +25,7 @@ class ReviewFactoryTest {
                 .setId(4582648)
                 .build();
 
-        RatingStars foodQuality = RatingStars.FIVE;
-        RatingStars deliveryQuality = RatingStars.FIVE;
-
-        Rating rating = RatingFactory.buildRating(order, foodQuality, deliveryQuality);
+        Rating rating = RatingFactory.buildRating(order, RatingStars.TWO, RatingStars.FOUR,RatingStars.THREE, RatingStars.THREE);
 
         Customer customer = new Customer.Builder()
                 .setEmail("PaulWalker@gmail.com")
@@ -51,10 +48,8 @@ class ReviewFactoryTest {
                 .setId(4582648)
                 .build();
 
-        RatingStars foodQuality = RatingStars.FIVE;
-        RatingStars deliveryQuality = RatingStars.FIVE;
+        Rating rating = RatingFactory.buildRating(order, RatingStars.TWO, RatingStars.FOUR,RatingStars.THREE, RatingStars.THREE);
 
-        Rating rating = RatingFactory.buildRating(order, foodQuality, deliveryQuality);
 
         Customer customer = new Customer.Builder()
                 .setEmail("PaulWalker@gmail.com")
@@ -75,12 +70,9 @@ class ReviewFactoryTest {
                     .setId(2225555)
                     .build();
 
-            RatingStars foodQuality = RatingStars.FIVE;
-            RatingStars deliveryQuality = RatingStars.TWO;
+        Rating rating = RatingFactory.buildRating(order, RatingStars.TWO, RatingStars.FOUR,RatingStars.THREE, RatingStars.THREE);
 
-            Rating rating = RatingFactory.buildRating(order, foodQuality, deliveryQuality);
-
-            Customer customer = new Customer.Builder()
+        Customer customer = new Customer.Builder()
                     .setEmail("VinDiesel@gmail.com")
                     .setName("Vin")
                     .setSurname("Diesel")
@@ -99,10 +91,7 @@ class ReviewFactoryTest {
                 .setId(2225555)
                 .build();
 
-        RatingStars foodQuality = RatingStars.FIVE;
-        RatingStars deliveryQuality = RatingStars.TWO;
-
-        Rating rating = RatingFactory.buildRating(order, foodQuality, deliveryQuality);
+        Rating rating = RatingFactory.buildRating(order, RatingStars.TWO, RatingStars.FOUR,RatingStars.THREE, RatingStars.THREE);
 
         Customer customer = new Customer.Builder()
                 .setEmail("VinDiesel@gmail.com")
