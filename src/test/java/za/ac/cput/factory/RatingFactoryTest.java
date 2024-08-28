@@ -26,7 +26,7 @@ class RatingFactoryTest {
         RatingStars foodQuality = RatingStars.FIVE;
         RatingStars deliveryQuality = RatingStars.FIVE;
 
-        Rating rating = RatingFactory.buildRating(order, foodQuality, deliveryQuality);
+        Rating rating = RatingFactory.buildRating(order, RatingStars.TWO, RatingStars.FOUR,RatingStars.THREE, RatingStars.THREE);
         assertNotNull(rating);
         System.out.println(rating);
     }
@@ -41,7 +41,7 @@ class RatingFactoryTest {
         RatingStars foodQuality = null;
         RatingStars deliveryQuality = RatingStars.FIVE;
 
-        Rating rating = RatingFactory.buildRating(order, foodQuality, deliveryQuality);
+        Rating rating = RatingFactory.buildRating(order, RatingStars.TWO, RatingStars.FOUR,RatingStars.THREE, RatingStars.THREE);
         assertNotNull(rating);
         System.out.println(rating);
     }
@@ -56,7 +56,7 @@ class RatingFactoryTest {
         RatingStars foodQuality = RatingStars.FIVE;
         RatingStars deliveryQuality = RatingStars.FOUR;
 
-        Rating rating = RatingFactory.buildRating(894874534L, order, foodQuality, deliveryQuality);
+        Rating rating = RatingFactory.buildRating(order, RatingStars.TWO, RatingStars.FOUR,RatingStars.THREE, RatingStars.THREE);
         assertNotNull(rating);
         System.out.println(rating);
     }
@@ -71,7 +71,7 @@ class RatingFactoryTest {
         RatingStars foodQuality = RatingStars.FIVE;
         RatingStars deliveryQuality = RatingStars.FIVE;
 
-        Rating rating = RatingFactory.buildRating(-894874534L, order, foodQuality, deliveryQuality);
+        Rating rating = RatingFactory.buildRating(order, RatingStars.TWO, RatingStars.FOUR,RatingStars.THREE, RatingStars.THREE);
         assertNotNull(rating);
         System.out.println(rating);
     }
