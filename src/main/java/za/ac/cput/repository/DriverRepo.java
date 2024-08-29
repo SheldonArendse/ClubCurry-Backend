@@ -6,4 +6,6 @@ import za.ac.cput.domain.Driver;
 
 @Repository
 public interface DriverRepo extends JpaRepository<Driver, String>{
+
+    public Driver findByUsername(String username);
 }
