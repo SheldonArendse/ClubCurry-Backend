@@ -55,4 +55,9 @@ public class MenuController {
     public ResponseEntity<List<Menu>> getAll(){
         return ResponseEntity.status(HttpStatus.OK).body(menuService.getAll());
     }
+
+    @GetMapping("/getByName/{name}")
+    public ResponseEntity<Menu> finByName(@PathVariable String name){
+        return ResponseEntity.status(HttpStatus.OK).body(menuService.findByName(name));
+    }
 }

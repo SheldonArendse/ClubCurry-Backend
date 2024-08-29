@@ -18,8 +18,7 @@ class MenuServiceTest {
     @Autowired
     private MenuService menuService;
 
-    //I need to figure this out... just to tired right now :)
-    // Good night
+    // for some reason the save is not setting this value for use in the read update and delete
     private static Menu fromDbSave;
 
     @Test
