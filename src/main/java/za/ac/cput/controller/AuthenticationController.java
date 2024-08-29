@@ -2,11 +2,8 @@ package za.ac.cput.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.Customer;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import za.ac.cput.domain.Employee;
 import za.ac.cput.service.AdminService;
 import za.ac.cput.service.CustomerService;
@@ -15,6 +12,7 @@ import za.ac.cput.service.GenStaffService;
 
 @RestController
 @RequestMapping("/authenticate")
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*") // Allow all origins and headers
 public class AuthenticationController {
 
     private final AdminService adminService;
