@@ -6,4 +6,6 @@ import za.ac.cput.domain.Menu;
 
 @Repository
 public interface MenuRepo extends JpaRepository<Menu, Long> {
+
+    public Menu findByName(String name);
 }

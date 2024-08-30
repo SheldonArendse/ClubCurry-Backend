@@ -49,4 +49,9 @@ public class MenuService implements IMenuService {
     public List<Menu> getAll() {
         return menuRepo.findAll();
     }
+
+    @Override
+    public Menu findByName(String name) {
+        return menuRepo.findByName(name);
+    }
 }
