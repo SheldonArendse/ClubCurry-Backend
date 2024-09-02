@@ -2,11 +2,18 @@ package za.ac.cput.domain;
 
 import jakarta.persistence.Entity;
 
+/**
+ * Represents an Admin entity that extends the Employee class.
+ * The Admin entity is used to manage admin-specific attributes and behaviors.
+ */
 @Entity
-public class Admin extends Employee{
-    protected Admin(){}
+public class Admin extends Employee {
 
-    public Admin(Builder obj){
+    // Protected no-args constructor for JPA
+    protected Admin() {}
+
+    // Constructor using Builder pattern to initialize an Admin instance
+    public Admin(Builder obj) {
         this.id = obj.id;
         this.name = obj.name;
         this.surname = obj.surname;
@@ -14,10 +21,11 @@ public class Admin extends Employee{
         this.username = obj.username;
     }
 
+    // Overrides the toString method to provide a string representation of the Admin object
     @Override
     public String toString() {
-        return "Chef{" +
-                "  id='" + id + '\'' +
+        return "Admin{" +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", username='" + username + '\'' +
@@ -25,9 +33,11 @@ public class Admin extends Employee{
                 '}';
     }
 
-    public static class Builder{
+    /**
+     * Builder class for constructing an Admin object using the Builder pattern.
+     */
+    public static class Builder {
         private String id;
-
         private String name, surname, username, password;
 
         public Builder setId(String id) {
@@ -55,7 +65,8 @@ public class Admin extends Employee{
             return this;
         }
 
-        public Builder copy(GeneralStaff obj){
+        // Copies the fields from an existing GeneralStaff object to this Builder
+        public Builder copy(GeneralStaff obj) {
             this.id = obj.id;
             this.name = obj.name;
             this.surname = obj.surname;
@@ -64,7 +75,8 @@ public class Admin extends Employee{
             return this;
         }
 
-        public Admin build(){
+        // Builds and returns an Admin instance using the Builder pattern
+        public Admin build() {
             return new Admin(this);
         }
     }
