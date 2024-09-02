@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.Driver;
 import za.ac.cput.domain.GeneralStaff;
+import za.ac.cput.domain.Vehicle;
 import za.ac.cput.factory.DriverFactory;
+import za.ac.cput.factory.VehicleFactory;
 import za.ac.cput.service.DriverService;
 
 import java.util.List;
@@ -26,7 +28,9 @@ public class DriverController {
     // Builds a new driver and saves it
     @PostMapping("/save")
     public ResponseEntity<Driver> save(@RequestBody Driver obj){
-        Driver driver = DriverFactory.buildDriver(obj.getId(), obj.getName(), obj.getSurname(), obj.getPassword(), obj.getUsername());
+        System.out.println(obj);
+        Vehicle vehicle = VehicleFactory.buildVehicle(obj.getRegistration().getId());
+        Driver driver = DriverFactory.buildDriver(obj.getId(),obj.getPetrolAllowance(),vehicle,obj.getName(),obj.getSurname(),obj.getPassword(),obj.getUsername());
 
         if(driver != null){
             if(!driverService.findByUsername(driver.getUsername())){
