@@ -10,40 +10,67 @@ import za.ac.cput.service.AdminService;
 
 import java.util.List;
 
+/**
+ * REST Controller for managing Admin-related operations.
+ */
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*") // Allow all origins and headers
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*") // Allow cross-origin requests from localhost:3000
 public class AdminController {
+
     private AdminService adminService;
 
+    /**
+     * Constructor-based dependency injection of AdminService.
+     *
+     * @param adminService the Admin service instance
+     */
     @Autowired
-    public AdminController(AdminService adminService){
+    public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
 
+    /**
+     * Saves a new Admin object to the database.
+     *
+     * @param obj the Admin object to save
+     * @return a ResponseEntity containing the saved Admin object or an error status
+     */
     @PostMapping("/save")
-    public ResponseEntity<Admin> save(@RequestBody Admin obj){
-        Admin boss = AdminFactory.buildAdmin(obj.getId(),obj.getName(),obj.getSurname(),obj.getUsername(),obj.getPassword());
-        if(boss != null){
-            if(!adminService.findAdminByUsername(boss.getUsername())){
+    public ResponseEntity<Admin> save(@RequestBody Admin obj) {
+        Admin boss = AdminFactory.buildAdmin(obj.getId(), obj.getName(), obj.getSurname(), obj.getUsername(), obj.getPassword());
+        if (boss != null) {
+            if (!adminService.findAdminByUsername(boss.getUsername())) {
                 return ResponseEntity.status(HttpStatus.OK).body(adminService.save(boss));
             }
         }
         return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
     }
 
+    /**
+     * Reads an Admin object by ID.
+     *
+     * @param id the ID of the Admin to read
+     * @return a ResponseEntity containing the Admin object or an error status
+     */
     @GetMapping("/read/{id}")
-    public ResponseEntity<Admin> read(@PathVariable String id){
+    public ResponseEntity<Admin> read(@PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(adminService.read(id));
     }
 
+    /**
+     * Updates an existing Admin object in the database.
+     *
+     * @param obj the Admin object to update
+     * @return a ResponseEntity containing the updated Admin object or an error status
+     */
     @PutMapping("/update")
-    public ResponseEntity<Admin> update(@RequestBody Admin obj){
-        Admin boss = AdminFactory.buildAdmin(obj.getId(),obj.getName(),obj.getSurname(),obj.getUsername(),obj.getPassword());
-        if(boss != null){
-            if(!adminService.findAdminByUsername(boss.getUsername())){
+    public ResponseEntity<Admin> update(@RequestBody Admin obj) {
+        Admin boss = AdminFactory.buildAdmin(obj.getId(), obj.getName(), obj.getSurname(), obj.getUsername(), obj.getPassword());
+        if (boss != null) {
+            if (!adminService.findAdminByUsername(boss.getUsername())) {
                 Admin bossMan = adminService.update(boss);
-                if(bossMan != null){
+                if (bossMan != null) {
                     return ResponseEntity.status(HttpStatus.OK).body(bossMan);
                 }
             }
@@ -51,13 +78,24 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
     }
 
+    /**
+     * Deletes an Admin object by ID.
+     *
+     * @param id the ID of the Admin to delete
+     * @return a ResponseEntity containing the deletion status
+     */
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable String id){
+    public ResponseEntity<Boolean> delete(@PathVariable String id) {
         return ResponseEntity.status(HttpStatus.OK).body(adminService.delete(id));
     }
 
+    /**
+     * Retrieves all Admin objects from the database.
+     *
+     * @return a ResponseEntity containing a list of all Admin objects
+     */
     @GetMapping("/getAll")
-    public ResponseEntity<List<Admin>> getAll(){
+    public ResponseEntity<List<Admin>> getAll() {
         return ResponseEntity.status(HttpStatus.OK).body(adminService.getAll());
     }
 }
